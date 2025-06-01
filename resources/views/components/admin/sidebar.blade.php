@@ -12,7 +12,7 @@
     <div class="flex justify-between items-center px-6 py-4 border-b border-white/20">
         <h2 class="text-lg font-bold tracking-wide">Admin Panel</h2>
         <button @click="showSidebar = false" class="md:hidden text-white hover:text-gray-300">
-            <i data-lucide="x" class="w-5 h-5"></i>
+            <x-heroicon-o-x-mark class="w-5 h-5" />
         </button>
     </div>
 
@@ -23,7 +23,7 @@
         </a>
 
         <a href="{{ route('admin.bulkOrders') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
-            <i data-lucide="box" class="w-5 h-5"></i> Bulk Orders
+            <x-heroicon-o-cube class="w-5 h-5" /> Bulk Orders
         </a>
 
         <a href="{{ route('admin.transactionHistory') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
@@ -31,7 +31,7 @@
         </a>
 
         <a href="{{ route('promotions.index') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
-            <i data-lucide="sparkles" class="w-5 h-5"></i> Promotions
+            <x-heroicon-o-sparkles class="w-5 h-5" /> Promotions
         </a>
 
         <a href="{{ route('admin.createForm') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
@@ -43,9 +43,8 @@
         </a>
 
         <a href="{{ route('qr.demo') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
-            <i data-lucide="qr-code" class="w-5 h-5"></i> QR Management
+            <x-heroicon-o-qr-code class="w-5 h-5" /> QR Management
         </a>
-
 
         <form action="{{ route('logout') }}" method="POST" class="block">
             @csrf

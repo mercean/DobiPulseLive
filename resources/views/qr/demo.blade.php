@@ -7,7 +7,7 @@
         <!-- Header -->
         <div class="text-center">
             <div class="flex justify-center items-center gap-2 text-3xl font-extrabold text-gray-800 dark:text-white">
-                <i data-lucide="qrcode" class="w-8 h-8 text-blue-600 dark:text-blue-400"></i>
+                <x-heroicon-o-qr-code class="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 <h1>DobiPulse QR Code Demo</h1>
             </div>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">
@@ -36,7 +36,7 @@
         <form method="GET" action="{{ route('qr.demo') }}" class="text-center">
             <button type="submit"
                 class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-200">
-                <i data-lucide="refresh-ccw" class="w-5 h-5"></i>
+                <x-heroicon-o-arrow-path class="w-5 h-5" />
                 Regenerate QR
             </button>
         </form>
@@ -45,8 +45,3 @@
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    lucide.createIcons();
-</script>
-@endpush

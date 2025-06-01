@@ -6,7 +6,7 @@
 
         <!-- Title -->
         <div class="flex items-center justify-center space-x-2 text-2xl font-bold text-gray-800 dark:text-white">
-            <i data-lucide="archive" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+            <x-heroicon-o-archive-box class="w-6 h-6 text-blue-600 dark:text-blue-400" />
             <span>Create Bulk Order</span>
         </div>
 
@@ -73,7 +73,7 @@
             <div class="pt-4">
                 <button type="submit"
                     class="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200">
-                    <i data-lucide="send" class="w-5 h-5"></i>
+                    <x-heroicon-o-paper-airplane class="w-5 h-5" />
                     Submit Order
                 </button>
             </div>
@@ -82,8 +82,4 @@
 </div>
 @endsection
 
-@push('scripts')
-<script>
-    lucide.createIcons();
-</script>
-@endpush
+

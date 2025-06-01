@@ -15,7 +15,7 @@
 <!-- Stats Cards -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
     <div class="rounded-xl bg-blue-50 dark:bg-gray-800 p-6 shadow flex items-center gap-4">
-        <x-lucide-users class="w-10 h-10 text-blue-500 dark:text-blue-400" />
+        <x-heroicon-o-users class="w-10 h-10 text-blue-500 dark:text-blue-400" />
         <div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Total Users</div>
             <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ $totalUsers }}</div>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="rounded-xl bg-green-50 dark:bg-gray-800 p-6 shadow flex items-center gap-4">
-        <x-lucide-package class="w-10 h-10 text-green-500 dark:text-green-400" />
+        <x-heroicon-o-archive-box class="w-10 h-10 text-green-500 dark:text-green-400" />
         <div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Bulk Orders</div>
             <div class="text-3xl font-bold text-green-600 dark:text-green-400">{{ $totalBulkOrders }}</div>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="rounded-xl bg-purple-50 dark:bg-gray-800 p-6 shadow flex items-center gap-4">
-        <x-lucide-file-text class="w-10 h-10 text-purple-500 dark:text-purple-400" />
+        <x-heroicon-o-document-text class="w-10 h-10 text-purple-500 dark:text-purple-400" />
         <div>
             <div class="text-sm text-gray-600 dark:text-gray-400">Normal Orders</div>
             <div class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ $totalOrders }}</div>
@@ -184,7 +184,7 @@
                         @foreach ($bulkOrders as $bulkOrder)
                         <tr>
                             <td class="px-4 py-2">{{ $bulkOrder->id }}</td>
-                            <td class="px-4 py-2">{{ $bulkOrder->user->name ?? 'Unknown User' }}</td>
+                    <td class="px-4 py-2">{{ $bulkOrder->user->name ?? 'Unknown User' }}</td>
                             <td class="px-4 py-2">{{ $bulkOrder->status }}</td>
                             <td class="px-4 py-2">
                                 @if ($bulkOrder->status === 'approved' && $bulkOrder->price <= 0)

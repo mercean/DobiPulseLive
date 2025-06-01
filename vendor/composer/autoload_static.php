@@ -26,9 +26,9 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '29ffe97919493792170d47eb03a68da9' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/helpers.php',
         '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '29ffe97919493792170d47eb03a68da9' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/helpers.php',
         '476ca15b8d69b04665cd879be9cb4c68' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
@@ -134,7 +134,6 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
             'Monolog\\' => 8,
             'Mockery\\' => 8,
             'Masterminds\\' => 12,
-            'MallardDuck\\LucideIcons\\' => 24,
         ),
         'L' => 
         array (
@@ -470,10 +469,6 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
-        ),
-        'MallardDuck\\LucideIcons\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mallardduck/blade-lucide-icons/src',
         ),
         'Livewire\\' => 
         array (
@@ -4650,7 +4645,6 @@ class ComposerStaticInit626b9e7ddd47fb7eff9aaa53cce0c9ad
         'Livewire\\WithPagination' => __DIR__ . '/..' . '/livewire/livewire/src/WithPagination.php',
         'Livewire\\WithoutUrlPagination' => __DIR__ . '/..' . '/livewire/livewire/src/WithoutUrlPagination.php',
         'Livewire\\Wrapped' => __DIR__ . '/..' . '/livewire/livewire/src/Wrapped.php',
-        'MallardDuck\\LucideIcons\\BladeLucideIconsServiceProvider' => __DIR__ . '/..' . '/mallardduck/blade-lucide-icons/src/BladeLucideIconsServiceProvider.php',
         'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
         'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
         'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',

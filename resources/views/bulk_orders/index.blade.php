@@ -8,7 +8,7 @@
         <!-- Welcome Section -->
         <div class="mb-10">
             <h1 class="text-3xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
-                <x-lucide-smile class="w-6 h-6 text-blue-500" />
+                <x-heroicon-o-face-smile class="w-6 h-6 text-blue-500" />
                 Welcome, {{ Auth::user()->name }}
             </h1>
             <p class="text-gray-500 dark:text-gray-400">Manage your bulk laundry orders efficiently</p>
@@ -23,21 +23,21 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow flex items-center gap-4">
-                <x-lucide-layers class="w-6 h-6 text-purple-500" />
+                <x-heroicon-o-rectangle-stack class="w-6 h-6 text-purple-500" />
                 <div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Total Bulk Orders</div>
                     <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">{{ $totalBulkOrders }}</div>
                 </div>
             </div>
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow flex items-center gap-4">
-                <x-lucide-loader class="w-6 h-6 text-yellow-500" />
+                <x-heroicon-o-arrow-path class="w-6 h-6 text-yellow-500" />
                 <div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Pending (This Page)</div>
                     <div class="text-2xl font-bold text-yellow-500 dark:text-yellow-400">{{ $pendingBulkOrders }}</div>
                 </div>
             </div>
             <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow flex items-center gap-4">
-                <x-lucide-weight class="w-6 h-6 text-indigo-500" />
+                <x-heroicon-o-scale class="w-6 h-6 text-indigo-500" />
                 <div>
                     <div class="text-sm text-gray-500 dark:text-gray-400">Total Weight (This Page)</div>
                     <div class="text-2xl font-bold text-indigo-600 dark:text-indigo-400">{{ number_format($totalBulkWeight, 1) }} kg</div>
@@ -49,7 +49,7 @@
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
             <a href="{{ route('bulk.orders.create') }}"
                class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg shadow transition">
-                <x-lucide-plus class="w-5 h-5" /> New Bulk Order
+                <x-heroicon-o-plus class="w-5 h-5" /> New Bulk Order
             </a>
 
             <!-- Filter -->
@@ -71,7 +71,7 @@
         <!-- Bulk Orders Table -->
         <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
             <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-4 flex items-center gap-2">
-                <x-lucide-package class="w-5 h-5 text-indigo-500" />
+                <x-heroicon-o-archive-box class="w-5 h-5 text-indigo-500" />
                 Your Bulk Orders
             </h2>
 
@@ -102,25 +102,25 @@
                             <td class="px-6 py-4 space-x-2">
                                 <a href="{{ route('bulk.orders.edit', $order->id) }}"
                                    class="inline-flex items-center text-indigo-600 hover:underline">
-                                    <x-lucide-pencil class="w-4 h-4 mr-1" /> Edit
+                                    <x-heroicon-o-pencil class="w-4 h-4 mr-1" /> Edit
                                 </a>
 
                                 <form action="{{ route('bulk.orders.destroy', $order->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="inline-flex items-center text-red-600 hover:underline">
-                                        <x-lucide-trash-2 class="w-4 h-4 mr-1" /> Delete
+                                        <x-heroicon-o-trash class="w-4 h-4 mr-1" /> Delete
                                     </button>
                                 </form>
 
                                 @if($order->status === 'PayNow' && $order->price > 0)
                                     <a href="{{ route('payment.bulk.gateway', $order->id) }}"
                                        class="inline-flex items-center text-green-600 hover:underline">
-                                        <x-lucide-wallet class="w-4 h-4 mr-1" /> Pay Now
+                                        <x-heroicon-o-credit-card class="w-4 h-4 mr-1" /> Pay Now
                                     </a>
                                 @elseif($order->status === 'Paid')
                                     <span class="ml-2 text-gray-400 italic flex items-center gap-1">
-                                        <x-lucide-badge-check class="w-4 h-4 text-green-500" /> Paid
+                                        <x-heroicon-o-check-badge class="w-4 h-4 text-green-500" /> Paid
                                     </span>
                                 @endif
                             </td>
@@ -138,7 +138,7 @@
 
             <!-- Pagination -->
             <div class="mt-6">
-        {{ $orders->appends(request()->query())->links() }}
+                {{ $orders->appends(request()->query())->links() }}
             </div>
         </div>
     </main>

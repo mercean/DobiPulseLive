@@ -34,11 +34,10 @@
     30 => 'Laravel\\Sail\\SailServiceProvider',
     31 => 'Laravel\\Tinker\\TinkerServiceProvider',
     32 => 'Livewire\\LivewireServiceProvider',
-    33 => 'MallardDuck\\LucideIcons\\BladeLucideIconsServiceProvider',
-    34 => 'Carbon\\Laravel\\ServiceProvider',
-    35 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    36 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    37 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
+    33 => 'Carbon\\Laravel\\ServiceProvider',
+    34 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    35 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    36 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
   ),
   'eager' => 
   array (
@@ -59,11 +58,10 @@
     14 => 'Laravel\\Pail\\PailServiceProvider',
     15 => 'Laravel\\Reverb\\ReverbServiceProvider',
     16 => 'Livewire\\LivewireServiceProvider',
-    17 => 'MallardDuck\\LucideIcons\\BladeLucideIconsServiceProvider',
-    18 => 'Carbon\\Laravel\\ServiceProvider',
-    19 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    20 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    21 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
+    17 => 'Carbon\\Laravel\\ServiceProvider',
+    18 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    19 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    20 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
   ),
   'deferred' => 
   array (

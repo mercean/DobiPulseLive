@@ -16,7 +16,6 @@
         "laravel/tinker": "^2.9",
         "league/csv": "^9.21",
         "livewire/livewire": "^3.6",
-        "mallardduck/blade-lucide-icons": "^1.23",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "stripe/stripe-php": "^16.4"
     },

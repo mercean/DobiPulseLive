@@ -76,13 +76,6 @@
       0 => 'Livewire\\LivewireServiceProvider',
     ),
   ),
-  'mallardduck/blade-lucide-icons' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'MallardDuck\\LucideIcons\\BladeLucideIconsServiceProvider',
-    ),
-  ),
   'nesbot/carbon' => 
   array (
     'providers' => 

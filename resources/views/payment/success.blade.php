@@ -3,9 +3,9 @@
 @section('content')
 <div class="container mx-auto p-6">
     <div class="max-w-xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow text-center">
-        <!-- Success Icon (Lucide) -->
+        <!-- Success Icon (Heroicon) -->
         <div class="flex justify-center mb-4">
-            <x-lucide-icon name="check-circle" class="w-12 h-12 text-green-500" />
+            <x-heroicon-o-check-circle class="w-12 h-12 text-green-500" />
         </div>
 
         <h1 class="text-3xl font-bold text-green-600 mb-4">
@@ -33,7 +33,7 @@
         <div class="mt-6">
             <a href="{{ route('bulk.orders.index') }}"
                class="inline-flex items-center gap-2 px-6 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
-                <x-lucide-icon name="arrow-left" class="w-4 h-4" />
+                <x-heroicon-o-arrow-left class="w-4 h-4" />
                 Back to My Bulk Orders
             </a>
         </div>
