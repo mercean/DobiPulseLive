@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Blade;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+         Blade::component('lucide-icon', \MallardDuck\BladeLucideIcons\BladeLucideIcons::class);
     }
 }
