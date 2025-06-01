@@ -1,0 +1,1493 @@
+/* Master Layout Styles */
+
+/* General Layout Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #cecece; /* Light gray background */
+  margin: 0;
+  padding: 0;
+}
+
+/* Navigation Bar Styles */
+/* Navigation Bar Styles */
+nav.master-nav {
+  background-color: #2e2e2e;  /* Red background for navbar */
+  color: #fff;  /* White text */
+  padding: 1rem 2rem;
+}
+
+nav.master-nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;  /* Keep the content centered */
+  margin: 0 auto;
+}
+
+/* Logo Styling */
+nav.master-nav .logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav.master-nav .logo a:hover {
+  color: #e2e8f0;  /* Light gray on hover */
+}
+
+/* Navigation Links Container */
+nav.master-nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+/* Individual Navbar Links */
+nav.master-nav ul li {
+  margin: 0;
+}
+
+nav.master-nav ul li a {
+  font-size: 1rem;  /* Standard font size for links */
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;  /* Consistent padding for all links */
+  border-radius: 0.375rem;
+  display: block;  /* Make the link fill the list item */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for all links */
+nav.master-nav ul li a:hover {
+  background-color: #575757;
+  color: #e2e8f0;  /* Light gray text on hover */
+}
+
+/* For User-specific Nav (Login, Logout) */
+nav.master-nav .user-nav button {
+  background-color: #e53e3e; /* Red background for logout */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+nav.master-nav .user-nav button:hover {
+  background-color: #c53030; /* Darker red on hover */
+}
+
+/* Responsive Adjustments for Navigation */
+@media (max-width: 768px) {
+  nav.master-nav .container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  nav.master-nav ul {
+      flex-direction: column;
+      margin-top: 1rem;
+  }
+
+  nav.master-nav ul li {
+      margin-bottom: 0.5rem;
+  }
+}
+
+
+/* Button Styles (Logout) */
+.logout-button {
+  background-color: #e53e3e; /* Red background */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem; /* Rounded corners */
+  cursor: pointer;
+  border: none;
+}
+
+.logout-button:hover {
+  background-color: #c53030; /* Darker red */
+}
+
+/* Main Content Area */
+.container {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1200px;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Responsive Adjustments for Navigation */
+@media (max-width: 768px) {
+  nav.master-nav .container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  nav.master-nav ul {
+      flex-direction: column;
+      margin-top: 1rem;
+  }
+
+  nav.master-nav ul li {
+      margin-bottom: 0.5rem;
+  }
+}
+
+/* Bulk User Dashboard Specific Styles */
+.bulk-dashboard-container {
+  background-color: #2e2e2e; /* Dark background for dashboard */
+  padding: 2rem;
+  color: white;
+}
+
+/* Header Styles */
+.bulk-dashboard-header h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+/* Card Styles */
+.bulk-dashboard-card {
+  background-color: #394458; /* Dark gray for the cards */
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.bulk-dashboard-card h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.bulk-dashboard-card a {
+  font-size: 1rem;
+  color: #edf2f7; /* Light gray for links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.bulk-dashboard-card a:hover {
+  color: #e2e8f0; /* Lighter gray for hover effect */
+}
+
+/* Profile Section */
+.bulk-dashboard-profile-section {
+  background-color: #1a244e; /* Dark gray background */
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bulk-dashboard-profile-section p {
+  font-size: 1rem;
+  color: #e2e8f0;
+}
+
+.bulk-dashboard-profile-section a {
+  color: #edf2f7;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.bulk-dashboard-profile-section a:hover {
+  color: #e2e8f0;
+}
+
+/* Action Button Styles */
+.bulk-dashboard-action-button-container {
+  margin-top: 2rem;
+}
+
+.bulk-dashboard-action-button {
+  background-color: #4a5568; /* Dark button background */
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  border: none;
+  text-transform: uppercase;
+}
+
+.bulk-dashboard-action-button:hover {
+  background-color: #2d3748; /* Slightly darker on hover */
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bulk-dashboard-container {
+      padding: 1rem;
+  }
+
+  .bulk-dashboard-header h1 {
+      font-size: 1.5rem;
+  }
+
+  .bulk-dashboard-card {
+      padding: 1rem;
+  }
+
+  .bulk-dashboard-action-button {
+      padding: 0.75rem 1.5rem;
+  }
+}
+/* Specific styles for Bulk User Dashboard - Account Section */
+.bulk-dashboard-account-section {
+    background-color: #2d3748; /* Dark gray background for account section */
+    padding: 1.5rem;
+    border-radius: 0.375rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.bulk-dashboard-account-section .account-section-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.bulk-dashboard-account-section .account-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.bulk-dashboard-account-section .account-link {
+    display: block;
+    font-size: 1rem;
+    color: #8cbbeb; /* Light gray color for links */
+    padding: 0.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.bulk-dashboard-account-section .account-link:hover {
+    color: #e2e8f0; /* Lighter gray on hover */
+    background-color: #4a5568; /* Darker background on hover */
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+}
+
+/* Left Vertical Sidebar */
+.bulk-dashboard-sidebar {
+    background-color: #1a202c; /* Darker background for sidebar */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    width: 250px; /* Set width for the sidebar */
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Sidebar Links */
+.sidebar-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-link {
+    display: block;
+    font-size: 1.1rem;
+    color: #edf2f7;
+    padding: 0.75rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-link:hover {
+    background-color: #4a5568;
+    color: #fff;
+    border-radius: 0.375rem;
+}
+
+/* Specific styles for Bulk Orders index */
+.bulk-order-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bulk-order-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.greeting-section h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4A5568;
+}
+
+.bulk-order-section .btn-create {
+  background-color: #2D3748;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.bulk-order-section .btn-create:hover {
+  background-color: #4A5568;
+}
+
+.bulk-order-table-container {
+  overflow-x: auto;
+}
+
+.bulk-order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bulk-order-table th, .bulk-order-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #000000;
+}
+
+.bulk-order-table th {
+  background-color: #464646;
+  color: #ffffff;
+}
+
+.bulk-order-table tr:hover {
+  background-color: #f7fafc;
+}
+
+.bulk-order-table td {
+  color: #000000;
+}
+
+.bulk-order-table a {
+  color: #3182ce;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.bulk-order-table a:hover {
+  color: #2b6cb0;
+}
+
+.bulk-order-table form button {
+  background: none;
+  color: #e53e3e;
+  border: none;
+  cursor: pointer;
+}
+
+.bulk-order-table form button:hover {
+  color: #c53030;
+}
+
+.custom-gap {
+  margin-bottom: 2rem; /* Adjust as needed */
+}
+
+/* Left Vertical Sidebar */
+.bulk-dashboard-sidebar {
+  background-color: #1a202c; /* Darker background for sidebar */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Sidebar Links */
+.sidebar-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-link {
+  display: block;
+  font-size: 1.1rem;
+  color: #edf2f7;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #4a5568;
+  color: #fff;
+  border-radius: 0.375rem;
+}
+
+/* Main Page Specific Styles */
+
+/* Main Page Container */
+.main-page-container {
+ 
+  background-color: #cecece;
+
+    display: flex;
+    align-items: center;     /* Align the items vertically in the center */
+    justify-content: space-between; /* Space between text and image */
+    width: 100%;             /* Ensure the container takes full width */
+    padding: 10px 0;         /* Optional padding */
+}
+
+/* Main Title */
+.main-page-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+
+
+  .welcome-image {
+    width: 30%;              /* Control image width */
+    height: 260px;            /* Maintain aspect ratio */
+    border-radius: 10px;     /* Rounded corners */
+    margin-left: 100px;       /* Push the image to the right */
+    margin-right: 0; 
+    display: block;          /* Ensure it's a block element, so margin works */
+  }
+
+
+
+/* Call-to-Action Button */
+.cta-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #4CAF50;  /* Green */
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #45a049; /* Darker green */
+}
+
+/* About Section */
+.about-mainpage-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.about-image {
+  width: 45%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.about-text {
+  width: 50%;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.about-heading {
+  font-size: 2rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Login Page Specific Styles */
+
+
+
+/* Login Page Container */
+.login-page-container {
+  
+  padding: 40px 30px;  /* Reduced padding for a smaller container */
+  background-color: #363636;  /* Dark Gray Background (Same as Bulk Dashboard) */
+  color: #fff;  /* White text for contrast */
+  min-height: 40vh;  /* Adjusted height for a more compact view */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  /* Center the content */
+  width: 60%;  /* Set the width to 80% to make it smaller */
+  max-width: 400px;  /* Max width for better responsiveness */
+  margin: 0 auto;  /* Center it horizontally */
+  border-radius: 50px;  /* Fully rounded (oval shape) */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  /* Soft shadow for effect */
+}
+
+
+/* Login Title */
+.login-page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;  /* White text for the title */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Login Form */
+.login-form-container {
+  max-width: 380px;  /* Adjust the width for a smaller container */
+  margin: 0 auto;
+  background-color: #fff;  /* White background for the form */
+  padding: 30px;
+  border-radius: 20px;  /* Fully rounded corners for the form */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);  /* Soft Shadow */
+}
+
+/* Form Fields */
+.login-form-container label {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.login-form-container input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;  /* Fully rounded edges for the input fields */
+  background-color: #f9fafb;
+  transition: border-color 0.3s ease;
+  font-size: 1rem;
+}
+
+/* Focused Input Fields */
+.login-form-container input:focus {
+  outline: none;
+  border-color: #4CAF50;  /* Green Border on Focus */
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);  /* Green Shadow on Focus */
+}
+
+/* Error Messages */
+.login-form-container p.error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+/* Submit Button */
+.login-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;  /* Green */
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 20px;  /* Rounded edges for the button */
+  margin-top: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-submit-btn:hover {
+  background-color: #45a049;  /* Darker Green on Hover */
+}
+
+.login-submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);  /* Green Focus Shadow */
+}
+
+/* Register Link */
+.login-register-link {
+  font-size: 0.875rem;
+  color: #4CAF50;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-register-link:hover {
+  color: #388e3c;  /* Darker Green */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+.login-page-container {
+    padding: 50px 15px;
+}
+
+.login-form-container {
+    padding: 20px;
+}
+
+.login-page-title {
+    font-size: 2rem;
+}
+}
+
+
+
+/* Admin Dashboard Styles */
+
+/* Main Container */
+.admin-dashboard-container {
+  background-color: #f7fafc;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Dashboard Overview Cards (Specific to Admin Dashboard) */
+.admin-dashboard-card {
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(133, 132, 132, 0.829);
+  color: #000;
+}
+
+/* Example color backgrounds for different cards */
+.admin-dashboard-total-users {
+  background-color: #ff6a25; /* Orange */
+}
+
+/* Remove the old total-orders card styling reference */
+
+/* Example style for bulk orders card - or rename as needed */
+.admin-dashboard-total-bulk-orders {
+  background-color: #1f70b3; /* Blue */
+}
+
+.admin-dashboard-card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.admin-dashboard-card-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Admin Card (General Section for Admin Dashboard) */
+.admin-dashboard-admin-card {
+  background-color: #93d36e;
+  padding: 2rem;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard-section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.admin-dashboard-table-container {
+  margin-top: 2rem;
+}
+
+/* Custom Table (Specific to Admin Dashboard) */
+.admin-dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  /* Optionally, give the whole table a border */
+  border: 1px solid #000; /* 1px black border around entire table */
+}
+
+.admin-dashboard-table-header {
+  background-color: #8b8f8c;
+}
+
+.admin-dashboard-table-cell {
+  padding: 12px;
+  /* 1px black grid for each cell: */
+  border: 1px solid #000;
+  text-align: left;
+}
+
+.admin-dashboard-table-cell a {
+  color: #3182ce;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.admin-dashboard-table-cell a:hover {
+  color: #2b6cb0;
+}
+
+/* Placeholder Chart for Admin Dashboard (if needed) */
+.admin-dashboard-chart-placeholder {
+  height: 16rem;
+  background-color: #edf2f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.375rem;
+}
+
+.admin-dashboard-text-gray-500 {
+  color: #6b7280;
+}
+
+/* Button Styles (for Admin Dashboard settings) */
+.admin-dashboard-button-update-settings {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-dashboard-button-update-settings:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-dashboard-container {
+    padding: 1rem;
+  }
+  .admin-dashboard-admin-card {
+    padding: 1rem;
+  }
+}
+
+/* Register Page Specific Styles */
+.register-page-container {
+  max-width: 900px; /* Limit max width of the container */
+  background-color: #363636; /* Light background for the register form */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 1rem;
+  margin-top: 50px;
+}
+
+.register-page-title {
+  font-size: 2.5rem; /* Larger title */
+  color: #ffffff; /* Dark gray for title */
+  font-weight: bold;
+  text-align: center;
+}
+
+.register-form {
+  background-color: white; /* White background for the form */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.register-form-group {
+  margin-bottom: 1.5rem; /* Adjust spacing between form groups */
+}
+
+.register-form-label {
+  display: block;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.register-form-input,
+.register-form-select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  color: #333;
+}
+
+.register-form-input:focus,
+.register-form-select:focus {
+  border-color: #4CAF50; /* Green border on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4); /* Green shadow on focus */
+}
+
+.register-form-submit {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form-submit:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.error-message {
+  color: #e53e3e; /* Red error messages */
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 768px) {
+  .register-page-container {
+      padding: 1rem;
+      max-width: 90%;
+  }
+
+  .register-page-title {
+      font-size: 2rem; /* Smaller title on mobile */
+  }
+
+  .register-form-input,
+  .register-form-select {
+      padding: 10px;
+  }
+
+  .register-form-submit {
+      padding: 10px;
+  }
+}
+
+/* Regular Dashboard Container */
+.regular-dashboard-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Regular Dashboard Title */
+.regular-dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+/* Regular Dashboard Section Titles */
+.regular-dashboard-section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+/* Placeholder Styling for Regular Dashboard */
+.regular-dashboard-placeholder {
+  background-color: #f3f4f6; /* Light gray background */
+  height: 40px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* For Responsive Design */
+@media (max-width: 768px) {
+  .regular-dashboard-container {
+      padding: 1rem;
+  }
+
+  .regular-dashboard-title {
+      font-size: 1.5rem;
+  }
+
+  .regular-dashboard-section-title {
+      font-size: 1.25rem;
+  }
+
+  .regular-dashboard-placeholder {
+      height: 30px;
+  }
+}
+
+/* Edit Profile Page Specific Styles */
+.edit-profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #363636; /* Light background for the page */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Edit Profile Title */
+.edit-profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff; /* Dark gray title */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Form Group */
+.edit-profile-form-group {
+  margin-bottom: 1.5rem; /* Space between form elements */
+}
+
+/* Label Styling */
+.edit-profile-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+/* Input Styling */
+.edit-profile-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9fafb;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.edit-profile-input:focus {
+  border-color: #4CAF50; /* Green border on focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4); /* Green shadow on focus */
+}
+
+/* Submit Button Styling */
+.edit-profile-submit-btn {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-profile-submit-btn:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .edit-profile-container {
+      padding: 1rem;
+      max-width: 90%;
+  }
+
+  .edit-profile-title {
+      font-size: 1.5rem;
+  }
+
+  .edit-profile-input {
+      padding: 10px;
+  }
+
+  .edit-profile-submit-btn {
+      padding: 10px;
+  }
+}
+
+/* About Us Page Specific Styles */
+.about-us-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem;
+  background-color: #f7fafc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-us-container:hover {
+  transform: translateY(-10px); /* Hover effect */
+}
+
+/* Title */
+.about-us-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Introduction Section */
+.about-us-introduction {
+  margin-bottom: 2rem;
+}
+
+.about-us-description {
+  font-size: 1.125rem;
+  color: #4a5568;
+  line-height: 1.8;
+}
+
+/* Features Section */
+.about-us-features-container {
+  margin-bottom: 2rem;
+}
+
+.about-us-features-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.about-us-features {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-us-feature-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.about-us-feature-item:hover {
+  transform: translateX(10px);
+  color: #4CAF50;
+}
+
+.about-us-icon {
+  color: #4CAF50;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.about-us-feature-item:hover .about-us-icon {
+  transform: rotate(360deg);
+}
+
+/* Additional Sections */
+.about-us-description-section {
+  margin-bottom: 2rem;
+}
+
+.about-us-vision {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #2d3748;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-container {
+      padding: 2rem;
+      max-width: 90%;
+  }
+
+  .about-us-title {
+      font-size: 2rem;
+  }
+
+  .about-us-description {
+      font-size: 1rem;
+  }
+
+  .about-us-feature-item {
+      font-size: 1rem;
+  }
+
+  .about-us-icon {
+      font-size: 1.2rem;
+  }
+}
+
+/* Services Page Specific Styles */
+.services-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem;
+  background-color: #f7fafc; /* Light background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out; /* Hover effect */
+}
+
+.services-container:hover {
+  transform: translateY(-8px); /* Subtle lift effect */
+}
+
+/* Title Styling */
+.services-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
+}
+
+.services-title:hover {
+  color: #4CAF50; /* Green color on hover */
+}
+
+/* Description Styling */
+.services-description {
+  font-size: 1.25rem;
+  color: #4a5568;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+/* Services List */
+.services-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-item {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  padding: 8px;
+}
+
+.services-item:hover {
+  transform: translateX(10px); /* Slide effect on hover */
+  color: #4CAF50; /* Green color on hover */
+}
+
+.services-icon {
+  color: #4CAF50;
+  margin-right: 1rem;
+  font-size: 1.6rem;
+  transition: transform 0.3s ease;
+}
+
+.services-item:hover .services-icon {
+  transform: rotate(360deg); /* Rotating icon on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .services-container {
+      padding: 2rem;
+      max-width: 90%;
+  }
+
+  .services-title {
+      font-size: 2rem;
+  }
+
+  .services-description {
+      font-size: 1rem;
+  }
+
+  .services-item {
+      font-size: 1rem;
+  }
+
+  .services-icon {
+      font-size: 1.4rem;
+  }
+}
+
+/* Payment Gateway Container */
+.payment-gateway-page .payment-gateway-container {
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Payment Gateway Title */
+.payment-gateway-page .payment-gateway-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Payment Gateway Subtitle */
+.payment-gateway-page .payment-gateway-container h2 {
+  font-size: 1.25rem;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Stripe Card Element */
+.payment-gateway-page #card-element {
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 12px;
+  margin-top: 20px;
+}
+
+/* Error Message */
+.payment-gateway-page #card-errors {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 10px;
+}
+
+/* Pay Now Button */
+.payment-gateway-page #pay-now-btn {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.payment-gateway-page #pay-now-btn:hover {
+  background-color: #45a049;
+}
+
+.payment-gateway-page #pay-now-btn:active {
+  background-color: #388e3c;
+}
+
+/* Centering the text */
+.payment-gateway-page .text-center {
+  text-align: center;
+}
+
+/* Margin Top */
+.payment-gateway-page .mt-8 {
+  margin-top: 2rem;
+}
+
+    /* Edit Profile Styles */
+    .edit-profile-01-container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #2c2c2c;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      color: #cecece;
+  }
+
+  .edit-profile-01-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #cecece;
+      font-family: 'Arial', sans-serif;
+  }
+
+  .edit-profile-01-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+
+  .edit-profile-01-form-group {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .edit-profile-01-label {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #cecece;
+  }
+
+  .edit-profile-01-input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #cecece;
+      border-radius: 5px;
+      background-color: #3a3a3a;
+      color: #cecece;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+  }
+
+  .edit-profile-01-input:focus {
+      border-color: #9e9e9e;
+      box-shadow: 0 0 5px #9e9e9e;
+  }
+
+  .edit-profile-01-submit-btn {
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      text-align: center;
+      background-color: #cecece;
+      color: #2c2c2c;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+  }
+
+  .edit-profile-01-submit-btn:hover {
+      background-color: #b0b0b0;
+  }
+  
+  /* Regular Dashboard Main Container */
+.regdash_main {
+  display: flex;
+  background-color: #f4f6f9;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar Styling */
+.regdash_sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.regdash_logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.regdash_menu {
+  list-style: none;
+  padding: 0;
+}
+
+.regdash_menu li {
+  margin-bottom: 15px;
+}
+
+.regdash_menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px;
+  display: block;
+  border-radius: 5px;
+}
+
+.regdash_menu a.active, .regdash_menu a:hover {
+  background-color: #34495e;
+}
+
+/* Main Content Area */
+.regdash_content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.regdash_title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Dashboard Cards */
+.regdash_stats {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.regdash_card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
+}
+
+.regdash_card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.regdash_card p {
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Table Styling */
+.regdash_table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.regdash_table th, .regdash_table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.regdash_table th {
+  background-color: #ecf0f1;
+}
+
+/* Buttons */
+.regdash_button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.regdash_button:hover {
+  background-color: #2980b9;
+}

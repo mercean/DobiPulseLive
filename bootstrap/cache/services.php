@@ -39,7 +39,6 @@
     35 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     36 => 'Termwind\\Laravel\\TermwindServiceProvider',
     37 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
-    38 => 'App\\Providers\\AppServiceProvider',
   ),
   'eager' => 
   array (
@@ -65,7 +64,6 @@
     19 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     20 => 'Termwind\\Laravel\\TermwindServiceProvider',
     21 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
-    22 => 'App\\Providers\\AppServiceProvider',
   ),
   'deferred' => 
   array (

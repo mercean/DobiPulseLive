@@ -326,7 +326,7 @@
                     <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td class="px-4 py-2"><?php echo e($order->id); ?></td>
-                        <td class="px-4 py-2"><?php echo e($order->user->name); ?></td>
+                        <td class="px-4 py-2"><?php echo e($order->user->name ?? 'Unknown User'); ?></td>
                         <td class="px-4 py-2">RM<?php echo e(number_format($order->total_amount, 2)); ?></td>
                         <td class="px-4 py-2"><?php echo e(ucfirst($order->status)); ?></td>
                         <td class="px-4 py-2"><?php echo e($order->created_at->format('d M Y')); ?></td>
@@ -410,7 +410,7 @@
                         <?php $__currentLoopData = $bulkOrders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bulkOrder): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td class="px-4 py-2"><?php echo e($bulkOrder->id); ?></td>
-                            <td class="px-4 py-2"><?php echo e($bulkOrder->user->name); ?></td>
+                            <td class="px-4 py-2"><?php echo e($bulkOrder->user->name ?? 'Unknown User'); ?></td>
                             <td class="px-4 py-2"><?php echo e($bulkOrder->status); ?></td>
                             <td class="px-4 py-2">
                                 <?php if($bulkOrder->status === 'approved' && $bulkOrder->price <= 0): ?>
