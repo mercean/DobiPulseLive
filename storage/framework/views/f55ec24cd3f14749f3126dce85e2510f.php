@@ -1,1 +1,0 @@
-<?php /**PATH C:\Users\amirs\OneDrive\Documents\DobiPulseV3\resources\views\filament\resources\bulk-order-resources\php-resource\pages\reports-page.blade.php ENDPATH**/ ?>
