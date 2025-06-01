@@ -25,6 +25,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-    Blade::component('lucide-icon', \MallardDuck\LucideIcons\BladeLucideIcons::class);
     }
 }
