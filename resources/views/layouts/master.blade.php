@@ -210,7 +210,12 @@
 @endauth
 
 <!-- In layouts/master.blade.php head section -->
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@if (app()->environment('local'))
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@else
+    <link rel="stylesheet" href="{{ asset('build/assets/app-CWbzp_a3.css') }}">
+    <script type="module" src="{{ asset('build/assets/app-CXU26zLQ.js') }}"></script>
+@endif
 
 
 
