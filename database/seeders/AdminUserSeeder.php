@@ -18,7 +18,7 @@ class AdminUserSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'adminsafwan@example.com',
             'password' => 'amirsaf32', // Use the hashed password
-            'account_type' => 'regular', // Set as admin
+            'account_type' => 'admin', // Set as admin
         ]);
     }
 }
