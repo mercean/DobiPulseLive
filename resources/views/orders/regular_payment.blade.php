@@ -12,8 +12,10 @@
     </div>
 
     <!-- Payment Section -->
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 border border-gray-200 dark:border-gray-700">
-        
+<div class="min-h-screen flex items-start md:items-center justify-center px-4 sm:px-6 lg:px-8 py-10">
+  <div class="max-w-3xl w-full bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+</div>
         <!-- Left: Payment Method -->
         <div class="space-y-6">
             <div>
@@ -99,6 +101,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 
