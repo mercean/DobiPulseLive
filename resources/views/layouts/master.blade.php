@@ -90,10 +90,19 @@
         @endguest
 
         @auth
-            <a href="{{ url('/') }}" class="flex items-center gap-1 hover:underline">
-                <x-heroicon-o-home class="w-5 h-5" />
-                Home
-            </a>
+        @php
+            $homeRoute = match(Auth::user()->account_type) {
+                'admin' => route('admin.dashboard'),
+                'bulk' => route('bulk.dashboard'),
+                'regular' => route('regular.dashboard'),
+                default => url('/'),
+            };
+        @endphp
+
+        <a href="{{ $homeRoute }}" class="flex items-center gap-1 hover:underline">
+            <x-heroicon-o-home class="w-5 h-5" />
+            Home
+        </a>
             <a href="{{ route('services') }}" class="flex items-center gap-1 hover:underline">
                 <x-heroicon-o-cog class="w-5 h-5" />
                 Services
