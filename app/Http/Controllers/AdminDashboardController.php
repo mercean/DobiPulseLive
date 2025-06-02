@@ -179,12 +179,16 @@ public function updateOrderStatus($id, $type, Request $request)
         ]);
     
         // Create the admin user
-        User::create([
+            User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Hash the password
-            'account_type' => 'admin', // Ensure the user is an admin
+            'password' => Hash::make($request->password),
+            'account_type' => 'admin',
+            'avatar' => $request->file('avatar') 
+                ? $request->file('avatar')->store('avatars', 'public') 
+                : null,
         ]);
+
     
         return redirect()->route('admin.dashboard')->with('status', 'New admin user created successfully!');
     }

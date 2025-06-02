@@ -26,8 +26,8 @@
             <x-heroicon-o-cube class="w-5 h-5" /> Bulk Orders
         </a>
 
-        <a href="{{ route('admin.transactionHistory') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
-            <x-heroicon-o-credit-card class="w-5 h-5" />Transactions
+        <a href="/admin/bulk-order/transaction-history" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
+             <x-heroicon-o-cube class="w-5 h-5" /> Transaction
         </a>
 
         <a href="{{ route('promotions.index') }}" class="flex items-center gap-3 px-3 py-2 rounded hover:bg-white hover:text-[#0f172a]">
