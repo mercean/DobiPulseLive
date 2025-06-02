@@ -2,24 +2,38 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-10">
-    <div class="text-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800 dark:text-white">🏍️ Checkout</h2>
-        <p class="text-gray-500 dark:text-gray-300">Complete your payment to confirm your order</p>
+    <!-- Header -->
+    <div class="text-center mb-10">
+        <div class="inline-flex items-center justify-center mb-2">
+            <x-heroicon-o-credit-card class="w-8 h-8 text-blue-600 dark:text-blue-400" />
+        </div>
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white">Secure Checkout</h2>
+        <p class="text-gray-500 dark:text-gray-300">Complete your payment to confirm your order and enjoy premium service.</p>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Payment Options -->
-    <div>
-        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-            <x-heroicon-o-credit-card class="inline w-5 h-5 text-blue-600" />
-        </h3>
-        <div class="space-y-4">
-            <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                <input type="radio" name="payment_method" value="card" class="accent-blue-600" checked>
-                <span>💳 Pay with Card (Powered by Stripe)</span>
-            </label>
+    <!-- Payment Section -->
+    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 border border-gray-200 dark:border-gray-700">
+        
+        <!-- Left: Payment Method -->
+        <div class="space-y-6">
+            <div>
+                <h3 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center gap-2">
+                    <x-heroicon-o-cash class="w-6 h-6 text-green-500" />
+                    Payment Method
+                </h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">We currently support only card payments via Stripe.</p>
+            </div>
+
+            <div class="mt-4 space-y-4">
+                <label class="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 px-4 py-3 rounded-lg cursor-pointer border border-transparent hover:border-blue-500 transition">
+                    <input type="radio" name="payment_method" value="card" class="accent-blue-600" checked>
+                    <div>
+                        <p class="font-medium text-gray-800 dark:text-white">💳 Pay with Card</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Visa, Mastercard, AMEX accepted.</p>
+                    </div>
+                </label>
+            </div>
         </div>
-    </div>
 
 
         <!-- Order Summary -->
