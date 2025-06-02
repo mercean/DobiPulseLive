@@ -1,0 +1,13 @@
+# Ignore local database and compiled files
+database/database.sqlite
+
+# Ignore Laravel logs and compiled views
+storage/logs/*
+storage/framework/views/*
+
+# Ignore environment config
+.env
+
+# Ignore IDE settings
+.vscode/
+.idea/

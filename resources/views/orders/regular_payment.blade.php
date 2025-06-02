@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container mx-auto px-4 py-10">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Header -->
     <div class="text-center mb-10">
         <div class="inline-flex items-center justify-center mb-2">
@@ -101,6 +101,16 @@
 </div>
 @endsection
 
+
+
+@php
+    $firstOrder = isset($orders) && $orders->isNotEmpty() ? $orders->first() : (isset($order) ? $order : null);
+    $firstOrderId = $firstOrder?->id ?? 0;
+    $orderIds = isset($orders) && $orders->isNotEmpty() ? $orders->pluck('id')->implode(',') : ($order->id ?? '');
+@endphp
+
+
+
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 <script>
@@ -112,30 +122,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const payNowBtn = document.getElementById('pay-now-btn');
     const originalTotal = {{ $totalAmount }};
     const finalTotalDisplay = document.getElementById('final-total');
-    let selectedPaymentMethod = null;
+    let selectedPaymentMethod = 'card';
     let discount = 0;
 
-@php
-    $firstOrder = isset($orders) && $orders->isNotEmpty() ? $orders->first() : (isset($order) ? $order : null);
-    $firstOrderId = $firstOrder?->id ?? 0;
-    $orderIds = isset($orders) && $orders->isNotEmpty() ? $orders->pluck('id')->implode(',') : ($order->id ?? '');
-@endphp
-
-    let cardMounted = false;
+        let cardMounted = false;
 
     function updateTotalDisplay() {
         const discountedTotal = originalTotal - discount;
         finalTotalDisplay.textContent = discountedTotal.toFixed(2);
     }
 
-    // Directly mount the Stripe card input and enable the button
-    selectedPaymentMethod = 'card';
     cardContainer.classList.remove('hidden');
     card.mount('#card-element');
-    cardMounted = true;
-    payNowBtn.disabled = false;
-    payNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
+    card.on('change', function(event) {
+        const payNowBtn = document.getElementById('pay-now-btn');
+        const cardErrors = document.getElementById('card-errors');
+
+        if (event.error) {
+            cardErrors.textContent = event.error.message;
+            payNowBtn.disabled = true;
+            payNowBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            cardErrors.textContent = '';
+            if (event.complete) {
+                payNowBtn.disabled = false;
+                payNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                payNowBtn.disabled = true;
+                payNowBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+    });
 
 
     document.getElementById('apply-coupon-btn').addEventListener('click', () => {
@@ -146,16 +164,9 @@ document.addEventListener('DOMContentLoaded', function () {
         feedback.textContent = code ? 'Coupon will be validated during payment.' : 'No coupon entered.';
         discountLabel.textContent = 'Coupon code added. Discount will apply if valid.';
         discountLabel.classList.remove('hidden');
-        payNowBtn.disabled = false;
-        payNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
     });
 
     payNowBtn.addEventListener('click', async function () {
-        if (selectedPaymentMethod !== 'card') {
-            alert('Only Credit Card is currently supported. Please select it to continue.');
-            return;
-        }
-
         const couponCode = document.getElementById('coupon_code').value.trim();
 
         const res = await fetch('{{ route("payment.regular.initiate") }}', {
@@ -181,10 +192,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 @else
                     window.location.href = "/payment/regular/success?order_id={{ $order->id }}";
                 @endif
-
             }
         }
     });
 });
 </script>
 @endsection
+

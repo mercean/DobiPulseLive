@@ -10,9 +10,9 @@ export default defineConfig({
   ],
   build: {
     manifest: true,
-    outDir: 'public/build', // 👈 important!
+    outDir: 'public/build', // ✅ this is correct
     rollupOptions: {
-      input: ['resources/css/app.css', 'resources/js/app.js'], // 👈 also important
+      input: ['resources/css/app.css', 'resources/js/app.js'],
     },
   },
 });
