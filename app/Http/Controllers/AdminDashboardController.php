@@ -208,6 +208,8 @@ public function updateOrderStatus($id, $type, Request $request)
     // Method to fetch Stripe transaction history for paid orders
     public function transactionHistory()
     {
+        \Log::info('🧪 Inside transactionHistory controller method');
+
         // Set the Stripe secret key
         Stripe::setApiKey(env('STRIPE_SECRET'));
 
