@@ -213,9 +213,13 @@
 @if (app()->environment('local'))
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 @else
-    <link rel="stylesheet" href="{{ asset('build/assets/app-CWbzp_a3.css') }}">
-    <script type="module" src="{{ asset('build/assets/app-CXU26zLQ.js') }}"></script>
+    @php
+        $manifest = json_decode(file_get_contents(public_path('build/.vite/manifest.json')), true);
+    @endphp
+    <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
+    <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
 @endif
+
 
 
 
