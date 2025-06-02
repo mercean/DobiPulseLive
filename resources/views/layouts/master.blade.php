@@ -210,15 +210,24 @@
 @endauth
 
 <!-- In layouts/master.blade.php head section -->
-@if (app()->environment('local'))
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@hasSection('vite')
+    @yield('vite')
 @else
     @php
-        $manifest = json_decode(file_get_contents(public_path('build/.vite/manifest.json')), true);
+        $isLocal = str_contains(request()->getHost(), 'test') || app()->environment('local');
     @endphp
-    <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
-    <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+
+    @if ($isLocal)
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/.vite/manifest.json')), true);
+        @endphp
+        <link rel="stylesheet" href="{{ asset('build/' . $manifest['resources/css/app.css']['file']) }}">
+        <script type="module" src="{{ asset('build/' . $manifest['resources/js/app.js']['file']) }}"></script>
+    @endif
 @endif
+
 
 
 
