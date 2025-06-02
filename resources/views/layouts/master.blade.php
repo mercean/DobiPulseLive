@@ -157,8 +157,9 @@
                       {{ $notif->data['title'] ?? 'Notification' }}
                     </div>
                     <div class="text-gray-600 dark:text-gray-400">
-                      {{ $notif->data['body'] ?? '' }}
+                        {{ $notif->data['message'] ?? $notif->data['body'] ?? 'No message' }}
                     </div>
+
                     <div class="text-xs text-right text-gray-400 mt-1">
                       {{ $notif->created_at->diffForHumans() }}
                     </div>

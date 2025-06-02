@@ -100,19 +100,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/payment/bulk/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.bulk.initiate');
     Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
 
-    // Admin
-    Route::put('/admin/update-order-status/{id}/{type}', [AdminDashboardController::class, 'updateOrderStatus'])->name('admin.updateOrderStatus');
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/create-admin', [AdminDashboardController::class, 'showCreateAdminForm'])->name('admin.createForm');
-    Route::post('/admin/store-admin', [AdminDashboardController::class, 'storeAdmin'])->name('admin.store');
-    Route::post('/admin/make-admin/{id}', [AdminDashboardController::class, 'makeAdmin'])->name('admin.makeAdmin');
-    Route::get('/admin/bulk-order/transaction-history', [AdminDashboardController::class, 'transactionHistory'])->name('admin.transactionHistory');
-    Route::get('/admin/export-transaction-history', [AdminDashboardController::class, 'exportTransactionHistory'])->name('admin.exportTransactionHistory');
-    Route::get('/admin/export-bulk-orders', [AdminDashboardController::class, 'exportBulkOrders'])->name('admin.exportBulkOrders');
-    Route::get('/admin/bulk-orders', [AdminDashboardController::class, 'bulkOrders'])->name('admin.bulkOrders');
-    Route::get('/admin/bulk-order/{id}/details', [AdminDashboardController::class, 'viewBulkOrderDetails'])->name('admin.viewBulkOrderDetails');
+
 
     Route::middleware(['auth', IsAdmin::class])->prefix('admin')->group(function () {
+
+    // Admin
+    Route::put('/update-order-status/{id}/{type}', [AdminDashboardController::class, 'updateOrderStatus'])->name('admin.updateOrderStatus');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/create-admin', [AdminDashboardController::class, 'showCreateAdminForm'])->name('admin.createForm');
+    Route::post('/store-admin', [AdminDashboardController::class, 'storeAdmin'])->name('admin.store');
+    Route::post('/make-admin/{id}', [AdminDashboardController::class, 'makeAdmin'])->name('admin.makeAdmin');
+    Route::get('/bulk-order/transaction-history', [AdminDashboardController::class, 'transactionHistory'])->name('admin.transactionHistory');
+    Route::get('/export-transaction-history', [AdminDashboardController::class, 'exportTransactionHistory'])->name('admin.exportTransactionHistory');
+    Route::get('/export-bulk-orders', [AdminDashboardController::class, 'exportBulkOrders'])->name('admin.exportBulkOrders');
+    Route::get('/bulk-orders', [AdminDashboardController::class, 'bulkOrders'])->name('admin.bulkOrders');
+    Route::get('/bulk-order/{id}/details', [AdminDashboardController::class, 'viewBulkOrderDetails'])->name('admin.viewBulkOrderDetails');
+    
         Route::resource('promotions', PromotionController::class)->names([
             'index' => 'promotions.index',
             'create' => 'promotions.create',

@@ -25,6 +25,8 @@ public function index(Request $request)
 {
     $status = $request->input('status');
     $search = $request->input('search');
+    $notifications = auth()->user()->unreadNotifications;
+
 
     // Unified query with status + search filters
     $bulkOrdersQuery = BulkOrder::with('user');
@@ -95,7 +97,8 @@ public function index(Request $request)
         'avgTimeToCompleteOrders',
         'dailyLabels',
         'dailyCounts',
-        'promotions'
+        'promotions',
+        'notifications' 
     ));
 }
 
