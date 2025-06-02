@@ -19,16 +19,22 @@ class OrderController extends Controller
 {
     public function createOrder()
     {
-        $machines = Machine::with(['active_order' => function ($query) {
-            $query->select('id', 'machine_id', 'status', 'end_time');
-        }])->get();
+        $machines = Machine::with('orders')->get()->map(function ($machine) {
+            $machine->active_order = $machine->orders
+                ->where('status', 'approved')
+                ->where('end_time', '>', now())
+                ->sortByDesc('end_time')
+                ->first();
+
+            return $machine;
+        });
 
         $orders = Order::where('user_id', auth()->id())
             ->whereIn('status', ['pending', 'processing', 'approved'])
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $points = \App\Models\LoyaltyPoint::where('user_id', auth()->id())->sum('points');
+        $points = LoyaltyPoint::where('user_id', auth()->id())->sum('points');
 
         $chartData = [
             'labels' => [],
@@ -42,6 +48,7 @@ class OrderController extends Controller
 
         return view('dashboard.new_order', compact('machines', 'orders', 'points', 'chartData'));
     }
+
 
     public function store(Request $request)
     {
