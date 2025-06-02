@@ -11,7 +11,7 @@
     <!-- Payment Options -->
     <div>
         <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-            @svg('credit-card', 'inline w-5 h-5 text-blue-600') Credit / Debit Card
+            <x-heroicon-o-credit-card class="inline w-5 h-5 text-blue-600" />
         </h3>
         <div class="space-y-4">
             <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
