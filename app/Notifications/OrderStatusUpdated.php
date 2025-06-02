@@ -11,7 +11,7 @@ use Illuminate\Notifications\Messages\DatabaseMessage;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class OrderStatusUpdated extends Notification implements ShouldQueue
+class OrderStatusUpdated extends Notification implements ShouldQueue, ShouldBroadcast
 {
     use Queueable;
 
@@ -70,4 +70,9 @@ class OrderStatusUpdated extends Notification implements ShouldQueue
             'url' => "/" . ($this->type === 'bulk' ? 'bulk-orders' : 'orders') . "/" . $this->order->id,
         ];
     }
+    public function broadcastOn()
+    {
+        return new \Illuminate\Broadcasting\PrivateChannel('App.Models.User.' . $this->order->user_id);
+    }
+
 }
