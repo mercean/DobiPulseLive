@@ -24,16 +24,7 @@
                 <p class="text-sm text-gray-500 dark:text-gray-400">We currently support only card payments via Stripe.</p>
             </div>
 
-            <div class="mt-4 space-y-4">
-                <label class="flex items-center gap-3 bg-gray-100 dark:bg-gray-700 px-4 py-3 rounded-lg cursor-pointer border border-transparent hover:border-blue-500 transition">
-                    <input type="radio" name="payment_method" value="card" class="accent-blue-600" checked>
-                    <div>
-                        <p class="font-medium text-gray-800 dark:text-white">💳 Pay with Card</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">Visa, Mastercard, AMEX accepted.</p>
-                    </div>
-                </label>
-            </div>
-        </div>
+
 
 
         <!-- Order Summary -->
@@ -137,28 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
         finalTotalDisplay.textContent = discountedTotal.toFixed(2);
     }
 
-    document.querySelectorAll('input[name="payment_method"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-            selectedPaymentMethod = radio.value;
-            if (selectedPaymentMethod === 'card') {
-                cardContainer.classList.remove('hidden');
-                if (!cardMounted) {
-                    card.mount('#card-element');
-                    cardMounted = true;
-                }
-            } else {
-                cardContainer.classList.add('hidden');
-                if (cardMounted) {
-                    card.unmount();
-                    cardMounted = false;
-                }
-            }
+    // Directly mount the Stripe card input and enable the button
+    selectedPaymentMethod = 'card';
+    cardContainer.classList.remove('hidden');
+    card.mount('#card-element');
+    cardMounted = true;
+    payNowBtn.disabled = false;
+    payNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
-            // ✅ Always enable Pay button once a payment method is selected
-            payNowBtn.disabled = false;
-            payNowBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        });
-    });
 
 
     document.getElementById('apply-coupon-btn').addEventListener('click', () => {
