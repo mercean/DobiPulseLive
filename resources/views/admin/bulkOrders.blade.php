@@ -43,7 +43,23 @@
                     <td class="px-4 py-2 font-medium">{{ $bulkOrder->id }}</td>
                     <td class="px-4 py-2">{{ $bulkOrder->user->name }}</td>
                     <td class="px-4 py-2 capitalize">{{ $bulkOrder->status }}</td>
-                    <td class="px-4 py-2">${{ number_format($bulkOrder->price, 2) }}</td>
+                    <td class="px-4 py-2">
+                        @if ($bulkOrder->status === 'approved' && $bulkOrder->price <= 0)
+                            <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="flex space-x-2">
+                                    <input type="number" step="0.01" name="price" placeholder="Enter Price" required
+                                        class="w-24 rounded px-2 py-1 text-sm dark:bg-gray-700 dark:text-white dark:border-gray-600">
+                                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded text-sm">
+                                        Set Price
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            RM{{ number_format($bulkOrder->price, 2) }}
+                        @endif
+                    </td>
                     <td class="px-4 py-2">
                         <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
                             @csrf
