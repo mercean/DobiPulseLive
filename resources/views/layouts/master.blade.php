@@ -228,5 +228,7 @@
     @endif
 @endif
 
+@yield('scripts')
+@stack('scripts')
 </body>
 </html>
