@@ -18,7 +18,7 @@
         <div class="space-y-6">
             <div>
                 <h3 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-                    <x-heroicon-o-cash class="w-6 h-6 text-green-500" />
+                <x-heroicon-o-currency-dollar class="w-6 h-6 text-green-500" />
                     Payment Method
                 </h3>
                 <p class="text-sm text-gray-500 dark:text-gray-400">We currently support only card payments via Stripe.</p>
