@@ -50,7 +50,7 @@ class LoyaltyController extends Controller
         $user = Auth::user();
         $points = LoyaltyPoint::where('user_id', $user->id)->sum('points');
         $rewards = RedemptionReward::all();
-        return view('Regular.redeem_catalog', compact('points', 'rewards'));
+        return view('regular.redeem_catalog', compact('points', 'rewards'));
     }
 
     public function generateCoupon($rewardId)
@@ -89,7 +89,7 @@ class LoyaltyController extends Controller
             'used' => false,
         ]);
 
-        return view('Regular.receipt', compact('coupon', 'reward'));
+        return view('regular.receipt', compact('coupon', 'reward'));
     }
 
     public function transactionHistory()
@@ -150,7 +150,7 @@ foreach ($coupons as $c) {
         ];
     }
 }
-return view('Regular.loyalty_points', compact('points','loyaltyLogs','coupons','redemptions'));
+return view('regular.loyalty_points', compact('points','loyaltyLogs','coupons','redemptions'));
 
 }
 
