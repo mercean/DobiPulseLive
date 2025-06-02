@@ -8,24 +8,19 @@
     </div>
 
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Payment Options -->
-        <div>
-            <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">💳 Payment Method</h3>
-            <div class="space-y-4">
-                <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                    <input type="radio" name="payment_method" value="card" class="accent-blue-600">
-                    <span>Credit Card</span>
-                </label>
-                <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                    <input type="radio" name="payment_method" value="online" class="accent-blue-600">
-                    <span>Online Bank Payment</span>
-                </label>
-                <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
-                    <input type="radio" name="payment_method" value="tng" class="accent-blue-600">
-                    <img src="{{ asset('images/tng-logo.png') }}" alt="Touch N Go" class="w-24">
-                </label>
-            </div>
+    <!-- Payment Options -->
+    <div>
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-4">
+            @svg('credit-card', 'inline w-5 h-5 text-blue-600') Credit / Debit Card
+        </h3>
+        <div class="space-y-4">
+            <label class="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
+                <input type="radio" name="payment_method" value="card" class="accent-blue-600" checked>
+                <span>💳 Pay with Card (Powered by Stripe)</span>
+            </label>
         </div>
+    </div>
+
 
         <!-- Order Summary -->
         <div>
