@@ -172,14 +172,26 @@ document.addEventListener('DOMContentLoaded', function () {
     payNowBtn.addEventListener('click', async function () {
         const couponCode = document.getElementById('coupon_code').value.trim();
 
-        const res = await fetch('{{ route("payment.regular.initiate") }}', {
+        @php
+            $isMulti = isset($orders);
+        @endphp
+
+        const res = await fetch('{{ $isMulti ? route("payment.regular.multi.initiate") : route("payment.regular.initiate") }}', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             },
-            body: JSON.stringify({ order_id: "{{ $firstOrderId }}", coupon: couponCode })
+            body: JSON.stringify({
+                @if($isMulti)
+                    order_ids: "{{ $orders->pluck('id')->implode(',') }}",
+                @else
+                    order_id: "{{ $order->id }}",
+                @endif
+                coupon: couponCode
+            })
         });
+
 
         const data = await res.json();
         if (data.clientSecret) {

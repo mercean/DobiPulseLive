@@ -141,6 +141,40 @@ public function regularInitiate(Request $request)
     }
 }
 
+public function regularMultiInitiate(Request $request)
+{
+    \Log::info('💳 MULTI INITIATE START', $request->all());
+
+    try {
+        $orderIds = explode(',', $request->order_ids);
+        $orders = Order::whereIn('id', $orderIds)
+            ->where('user_id', auth()->id())
+            ->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['error' => 'No valid orders found.'], 400);
+        }
+
+        $totalAmount = $orders->sum('total_amount');
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
+
+        $paymentIntent = \Stripe\PaymentIntent::create([
+            'amount' => $totalAmount * 100,
+            'currency' => 'myr',
+            'metadata' => [
+                'order_ids' => implode(',', $orderIds),
+                'user_id' => auth()->id(),
+            ],
+        ]);
+
+        return response()->json([
+            'clientSecret' => $paymentIntent->client_secret,
+        ]);
+    } catch (\Throwable $e) {
+        \Log::error('💥 Multi Payment Initiate Error: ' . $e->getMessage());
+        return response()->json(['error' => 'Something went wrong during payment.'], 500);
+    }
+}
 
 
 

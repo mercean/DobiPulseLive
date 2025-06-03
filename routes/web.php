@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment/regular/multi', [PaymentController::class, 'regularPaymentMultiPage'])->name('payment.regular.multi');
     Route::get('/payment/regular/{order}', [PaymentController::class, 'regularPaymentPage'])->name('payment.regular.page');
     Route::get('/checkout/{order}', [PaymentController::class, 'showCheckoutPage'])->name('checkout.page');
+    Route::post('/payment/regular/multi/initiate', [PaymentController::class, 'regularMultiInitiate'])->name('payment.regular.multi.initiate');
 
     // Loyalty Points
     Route::post('/loyalty/redeem', [LoyaltyController::class, 'redeemPoints']);
