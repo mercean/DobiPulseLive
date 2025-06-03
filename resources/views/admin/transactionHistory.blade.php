@@ -20,6 +20,7 @@
         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 text-sm text-left">
             <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                 <tr>
+                    <th class="px-4 py-3">User</th>
                     <th class="px-4 py-3">#</th>
                     <th class="px-4 py-3">Amount</th>
                     <th class="px-4 py-3">Status</th>
@@ -31,18 +32,24 @@
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-gray-800 dark:text-gray-200">
                 @forelse($transactions as $transaction)
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                        <td class="px-4 py-3">
+                            @if ($transaction->user)
+                                {{ $transaction->user->email }}
+                            @elseif ($transaction->order && $transaction->order->guest_email)
+                                {{ $transaction->order->guest_email }}
+                            @else
+                                <span class="text-gray-400">Unknown</span>
+                            @endif
+                        </td>
+
                         <td class="px-4 py-3 font-medium">{{ $transaction->id }}</td>
                         <td class="px-4 py-3">RM{{ number_format($transaction->amount / 100, 2) }}</td>
                         <td class="px-4 py-3 capitalize">{{ $transaction->status }}</td>
                         <td class="px-4 py-3">
-                            @if (isset($transaction->payment_method_details->card))
-                                {{ ucfirst($transaction->payment_method_details->card->brand) }}
-                            @else
-                                <span class="text-gray-400">N/A</span>
-                            @endif
+                            {{ ucfirst($transaction->method ?? 'N/A') }}
                         </td>
                         <td class="px-4 py-3">{{ $transaction->metadata['order_id'] ?? 'N/A' }}</td>
-                        <td class="px-4 py-3">{{ \Carbon\Carbon::createFromTimestamp($transaction->created)->toDateString() }}</td>
+                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($transaction->created_at)->toDateString() }}</td>
                     </tr>
                 @empty
                     <tr>

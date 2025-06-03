@@ -15,6 +15,8 @@ use Illuminate\Http\Response;
 use App\Jobs\SendPickupReminder; // ⬅️ Add this at the top
 use Carbon\Carbon;
 use App\Models\Promotion;
+use App\Models\Payment;
+
 
 
 
@@ -211,28 +213,29 @@ public function updateOrderStatus($id, $type, Request $request)
 
     // Method to fetch Stripe transaction history for paid orders
     public function transactionHistory()
-    {
-        \Log::info('🧪 Inside transactionHistory controller method');
+{
+    \Log::info('🧪 Inside transactionHistory controller method');
 
-        // Set the Stripe secret key
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+    // Set Stripe API key from .env
+    Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        try {
-            // Fetch the transactions from Stripe (from a specific date range or all)
-            $transactions = BalanceTransaction::all([
-                'limit' => 10, // Limit number of transactions to fetch
-                'created' => ['gte' => strtotime('last month')], // Example: filter by last month
-            ]);
+    try {
+        // Fetch live Stripe transactions (last 30 days, limit 10)
+// ✅ NEW (local)
+            $transactions = \App\Models\Payment::with('user', 'order')->latest()->take(10)->get();
 
-            // Fetch all paid Bulk Orders (just for clarity)
-            $paidBulkOrders = BulkOrder::where('status', 'processing')->get();
 
-            return view('admin.transactionHistory', compact('transactions', 'paidBulkOrders'));
+        // Optional: show bulk orders that are in processing (you can remove this if not needed)
+        $paidBulkOrders = BulkOrder::where('status', 'processing')->get();
 
-        } catch (\Exception $e) {
-            return back()->with('error', 'Error fetching transaction history: ' . $e->getMessage());
-        }
+        return view('admin.transactionHistory', compact('transactions', 'paidBulkOrders'));
+
+    } catch (\Exception $e) {
+        // Catch and show any Stripe-related error
+        return back()->with('error', 'Error fetching transaction history: ' . $e->getMessage());
     }
+}
+
 
     public function makeAdmin($id)
 {
@@ -289,10 +292,9 @@ public function exportTransactionHistory()
 
     // Fetch the transactions (modify this query to suit your needs)
     try {
-        $transactions = BalanceTransaction::all([
-            'limit' => 10,  // Customize the number of transactions
-            'created' => ['gte' => strtotime('last month')],  // Example filter for the last month
-        ]);
+// ✅ NEW (local)
+            $transactions = \App\Models\Payment::with('user', 'order')->latest()->take(10)->get();
+
     } catch (\Exception $e) {
         return back()->with('error', 'Error fetching transactions: ' . $e->getMessage());
     }
@@ -307,13 +309,14 @@ public function exportTransactionHistory()
     foreach ($transactions as $transaction) {
         $csv->insertOne([
             $transaction->id,
-            number_format($transaction->amount / 100, 2),  // Convert amount to dollars
+            number_format($transaction->amount / 100, 2),
             ucfirst($transaction->status),
-            isset($transaction->payment_method_details->card) ? $transaction->payment_method_details->card->brand : 'N/A',
-            $transaction->metadata['order_id'] ?? 'N/A',
-            \Carbon\Carbon::createFromTimestamp($transaction->created)->toDateString(),
+            $transaction->method ?? 'N/A',
+            $transaction->order->order_number ?? 'N/A',
+            $transaction->created_at->toDateString(),
         ]);
     }
+
 
     // Create a response to return the CSV file as a download
     $response = new Response($csv->getContent());
