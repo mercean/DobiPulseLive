@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-6" 
-x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userCollapsed: true }">
+x-data="{ 
+    activeTab: 'normal', 
+    normalCollapsed: true, 
+    bulkCollapsed: true, 
+    userCollapsed: true, 
+    promotionsCollapsed: true 
+}">
 <!-- Welcome Section -->
 <div class="flex items-center justify-center gap-4 mb-10">
     <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D8ABC&color=fff&size=80' }}" class="w-16 h-16 rounded-full border-4 border-blue-500 shadow-md">
@@ -131,21 +137,21 @@ x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userC
         </button>
     </div>
 
-<!-- Normal Orders Filter -->
-<form action="{{ route('admin.dashboard') }}" method="GET" class="mb-4">
-    <select name="normal_status" class="rounded px-3 py-2 border bg-white dark:bg-gray-700 text-sm">
-        <option value="">All</option>
-        <option value="pending" {{ request('normal_status') == 'pending' ? 'selected' : '' }}>Pending</option>
-        <option value="approved" {{ request('normal_status') == 'approved' ? 'selected' : '' }}>Approved</option>
-        <option value="paid" {{ request('normal_status') == 'paid' ? 'selected' : '' }}>Paid</option>
-        <option value="processing" {{ request('normal_status') == 'processing' ? 'selected' : '' }}>Processing</option>
-        <option value="finished" {{ request('normal_status') == 'finished' ? 'selected' : '' }}>Finished</option>
-    </select>
-    <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
-</form>
+    <!-- Filter -->
+    <form action="{{ route('admin.dashboard') }}" method="GET" class="mb-4">
+        <select name="normal_status" class="rounded px-3 py-2 border bg-white dark:bg-gray-700 text-sm">
+            <option value="">All</option>
+            <option value="pending" {{ request('normal_status') == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="approved" {{ request('normal_status') == 'approved' ? 'selected' : '' }}>Approved</option>
+            <option value="paid" {{ request('normal_status') == 'paid' ? 'selected' : '' }}>Paid</option>
+            <option value="processing" {{ request('normal_status') == 'processing' ? 'selected' : '' }}>Processing</option>
+            <option value="finished" {{ request('normal_status') == 'finished' ? 'selected' : '' }}>Finished</option>
+        </select>
+        <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+    </form>
 
-    <!-- Table Body -->
-    <div x-show="!normalCollapsed" x-cloak>
+    <!-- Table -->
+    <div x-show="!normalCollapsed" x-collapse x-cloak>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="bg-gray-100 dark:bg-gray-700">
@@ -169,145 +175,165 @@ x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userC
                     @endforeach
                 </tbody>
             </table>
-                        <!-- Pagination -->
-            <div class="mt-4">
-                {{ $orders->appends(request()->query())->links() }}
-            </div>
+            {{ $orders->appends(request()->query())->links() }}
+        </div>
+    </div>
+</div>
 
-        </div>
+
+   <!-- Bulk Orders Table -->
+<div x-show="activeTab === 'bulk'" x-cloak class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-10">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold text-gray-800 dark:text-white">📦 Bulk Orders</h2>
+        <button @click="bulkCollapsed = !bulkCollapsed">
+            <x-heroicon-o-chevron-down x-show="bulkCollapsed" class="w-6 h-6" />
+            <x-heroicon-o-chevron-up x-show="!bulkCollapsed" class="w-6 h-6" />
+        </button>
     </div>
 
-    <!-- Bulk Orders Table -->
-    <div x-show="activeTab === 'bulk'" x-cloak class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-10">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold text-gray-800 dark:text-white">📦 Bulk Orders</h2>
-            <button @click="bulkCollapsed = !bulkCollapsed">
-                <x-heroicon-o-chevron-down x-show="bulkCollapsed" class="w-6 h-6" />
-                <x-heroicon-o-chevron-up x-show="!bulkCollapsed" class="w-6 h-6" />
-            </button>
-        </div>
-        <div x-show="!bulkCollapsed" x-cloak>
-            <form action="{{ route('admin.bulkOrders') }}" method="GET" class="mb-4">
-                <select name="status" class="rounded px-3 py-2 border bg-white dark:bg-gray-700 text-sm">
-                    <option value="">All</option>
-                    <option value="pending">Pending</option>
-                    <option value="processing">Processing</option>
-                    <option value="finished">Finished</option>
-                </select>
-                <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
-            </form>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-gray-100 dark:bg-gray-700">
-                        <tr>
-                            <th class="px-4 py-2">Order ID</th>
-                            <th class="px-4 py-2">User</th>
-                            <th class="px-4 py-2">Status</th>
-                            <th class="px-4 py-2">Price</th>
-                            <th class="px-4 py-2">Action</th>
-                            <th class="px-4 py-2">Details</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y dark:divide-gray-700">
-                        @foreach ($bulkOrders as $bulkOrder)
-                        <tr>
-                            <td class="px-4 py-2">{{ $bulkOrder->id }}</td>
-                    <td class="px-4 py-2">{{ $bulkOrder->user->name ?? 'Unknown User' }}</td>
-                            <td class="px-4 py-2">{{ $bulkOrder->status }}</td>
-                            <td class="px-4 py-2">
-                                @if ($bulkOrder->status === 'approved' && $bulkOrder->price <= 0)
-                                    <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
-                                        @csrf @method('PUT')
-                                        <input type="number" step="0.01" name="price" class="rounded px-2 py-1 text-sm" required>
-                                        <button class="ml-2 bg-indigo-600 text-white px-2 py-1 rounded">Update</button>
-                                    </form>
-                                @elseif($bulkOrder->price > 0)
-                                    RM{{ number_format($bulkOrder->price, 2) }}
-                                @else
-                                    N/A
-                                @endif
-                            </td>
-                            <td class="px-4 py-2">
-                                <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
-                                    @csrf @method('PUT')
-                                    <select name="status" class="rounded px-2 py-1">
-                                        @foreach(['pending','approved','PayNow','paid','processing','waiting pickup','finished'] as $status)
-                                            <option value="{{ $status }}" {{ $bulkOrder->status == $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
-                                            
-                                        @endforeach
-                                    </select>
-                                    <button class="ml-2 bg-blue-600 text-white px-2 py-1 rounded">Update</button>
-                                </form>
-                            </td>
-                            <td class="px-4 py-2">
-                                <a href="{{ route('admin.viewBulkOrderDetails', $bulkOrder->id) }}" class="text-blue-600 hover:underline">View</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- Promotions Tab Section -->
-    <div x-show="activeTab === 'promotions'" x-cloak class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-white">🎉 Active Promotions</h2>
-            <a href="{{ route('promotions.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Manage Promotions</a>
-        </div>
-        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300">
-            @forelse ($promotions->filter(fn($p) => now()->between($p->start_date, $p->end_date)) as $promo)
-                <li><strong>{{ $promo->title }}</strong> - {{ $promo->type === 'percent' ? $promo->value . '%' : 'RM' . number_format($promo->value, 2) }} off until {{ $promo->end_date->format('d M Y') }}</li>
-            @empty
-                <li>No active promotions currently.</li>
-            @endforelse
-        </ul>
-    </div>
-    <!-- User Management -->
-    <div x-show="activeTab === 'users'" x-cloak class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-10">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold text-gray-800 dark:text-white">👤 User Management</h2>
-            <button @click="userCollapsed = !userCollapsed">
-                <x-heroicon-o-chevron-down x-show="userCollapsed" class="w-6 h-6" />
-                <x-heroicon-o-chevron-up x-show="!userCollapsed" class="w-6 h-6" />
-            </button>
-        </div>
-        <div x-show="!userCollapsed" x-cloak>
+    <div x-show="!bulkCollapsed" x-collapse x-cloak>
+        <!-- Filter -->
+        <form action="{{ route('admin.bulkOrders') }}" method="GET" class="mb-4">
+            <select name="status" class="rounded px-3 py-2 border bg-white dark:bg-gray-700 text-sm">
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="finished">Finished</option>
+            </select>
+            <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+        </form>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="bg-gray-100 dark:bg-gray-700">
                     <tr>
-                        <th class="px-4 py-2">User ID</th>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Type</th>
+                        <th class="px-4 py-2">Order ID</th>
+                        <th class="px-4 py-2">User</th>
+                        <th class="px-4 py-2">Status</th>
+                        <th class="px-4 py-2">Price</th>
                         <th class="px-4 py-2">Action</th>
+                        <th class="px-4 py-2">Details</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y dark:divide-gray-700">
-                    @foreach ($users as $user)
+                    @foreach ($bulkOrders as $bulkOrder)
                     <tr>
-                        <td class="px-4 py-2">{{ $user->id }}</td>
-                        <td class="px-4 py-2">{{ $user->name }}</td>
-                        <td class="px-4 py-2">{{ $user->email }}</td>
-                        <td class="px-4 py-2">{{ ucfirst($user->account_type) }}</td>
+                        <td class="px-4 py-2">{{ $bulkOrder->id }}</td>
+                        <td class="px-4 py-2">{{ $bulkOrder->user->name ?? 'Unknown User' }}</td>
+                        <td class="px-4 py-2">{{ $bulkOrder->status }}</td>
                         <td class="px-4 py-2">
-                            @if ($user->account_type !== 'admin')
-                                <form action="{{ route('admin.createForm') }}" method="GET">
-                                    @csrf
-                                    <button class="bg-green-600 text-white px-3 py-1 rounded">Make Admin</button>
+                            @if ($bulkOrder->status === 'approved' && $bulkOrder->price <= 0)
+                                <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
+                                    @csrf @method('PUT')
+                                    <input type="number" step="0.01" name="price" class="rounded px-2 py-1 text-sm" required>
+                                    <button class="ml-2 bg-indigo-600 text-white px-2 py-1 rounded">Update</button>
                                 </form>
+                            @elseif($bulkOrder->price > 0)
+                                RM{{ number_format($bulkOrder->price, 2) }}
                             @else
-                                <span class="text-gray-500">Admin</span>
+                                N/A
                             @endif
+                        </td>
+                        <td class="px-4 py-2">
+                            <form action="{{ route('admin.updateOrderStatus', ['id' => $bulkOrder->id, 'type' => 'bulkOrder']) }}" method="POST">
+                                @csrf @method('PUT')
+                                <select name="status" class="rounded px-2 py-1">
+                                    @foreach(['pending','approved','PayNow','paid','processing','waiting pickup','finished'] as $status)
+                                        <option value="{{ $status }}" {{ $bulkOrder->status == $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                                    @endforeach
+                                </select>
+                                <button class="ml-2 bg-blue-600 text-white px-2 py-1 rounded">Update</button>
+                            </form>
+                        </td>
+                        <td class="px-4 py-2">
+                            <a href="{{ route('admin.viewBulkOrderDetails', $bulkOrder->id) }}" class="text-blue-600 hover:underline">View</a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{ route('admin.createForm') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">Create New Admin</a>
         </div>
     </div>
 </div>
+
+<!-- Promotions Tab Section -->
+<div x-show="activeTab === 'promotions'" x-cloak class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow mb-10">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-white">🎉 Active Promotions</h2>
+        <button @click="promotionsCollapsed = !promotionsCollapsed">
+            <x-heroicon-o-chevron-down x-show="promotionsCollapsed" class="w-6 h-6" />
+            <x-heroicon-o-chevron-up x-show="!promotionsCollapsed" class="w-6 h-6" />
+        </button>
+    </div>
+
+    <div x-show="!promotionsCollapsed" x-collapse x-cloak>
+        <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4">
+            @forelse ($promotions->filter(fn($p) => now()->between($p->start_date, $p->end_date)) as $promo)
+                <li>
+                    <strong>{{ $promo->title }}</strong> - 
+                    {{ $promo->type === 'percent' ? $promo->value . '%' : 'RM' . number_format($promo->value, 2) }} off 
+                    until {{ $promo->end_date->format('d M Y') }}
+                </li>
+            @empty
+                <li>No active promotions currently.</li>
+            @endforelse
+        </ul>
+
+        <a href="{{ route('promotions.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+            Manage Promotions
+        </a>
+    </div>
+</div>
+
+    <!-- User Management -->
+<div x-show="activeTab === 'users'" x-cloak class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-10">
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold text-gray-800 dark:text-white">👤 User Management</h2>
+        <button @click="userCollapsed = !userCollapsed">
+            <x-heroicon-o-chevron-down x-show="userCollapsed" class="w-6 h-6" />
+            <x-heroicon-o-chevron-up x-show="!userCollapsed" class="w-6 h-6" />
+        </button>
+    </div>
+
+    <div x-show="!userCollapsed" x-collapse x-cloak>
+        <table class="w-full text-sm text-left">
+            <thead class="bg-gray-100 dark:bg-gray-700">
+                <tr>
+                    <th class="px-4 py-2">User ID</th>
+                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">Email</th>
+                    <th class="px-4 py-2">Type</th>
+                    <th class="px-4 py-2">Action</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y dark:divide-gray-700">
+                @foreach ($users as $user)
+                <tr>
+                    <td class="px-4 py-2">{{ $user->id }}</td>
+                    <td class="px-4 py-2">{{ $user->name }}</td>
+                    <td class="px-4 py-2">{{ $user->email }}</td>
+                    <td class="px-4 py-2">{{ ucfirst($user->account_type) }}</td>
+                    <td class="px-4 py-2">
+                        @if ($user->account_type !== 'admin')
+                            <form action="{{ route('admin.createForm') }}" method="GET">
+                                <button class="bg-green-600 text-white px-3 py-1 rounded">Make Admin</button>
+                            </form>
+                        @else
+                            <span class="text-gray-500">Admin</span>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        <a href="{{ route('admin.createForm') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded">
+            Create New Admin
+        </a>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
