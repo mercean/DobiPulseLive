@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // Regular user or null for guest
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreignId('order_id')->nullable()->constrained()->nullOnDelete(); // One-to-one or just the first of multi
             $table->string('payment_intent_id')->unique(); // Stripe PaymentIntent ID
             $table->decimal('amount', 8, 2); // MYR currency, 999,999.99 max
