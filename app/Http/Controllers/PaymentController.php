@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session; 
 use Illuminate\Support\Facades\Config;
 use App\Models\BulkOrder;
 use App\Models\Coupon;
@@ -186,15 +187,58 @@ public function regularMultiInitiate(Request $request)
             return response()->json(['error' => 'No valid orders found.'], 400);
         }
 
+        $discountAmount = 0;
+        $promoApplied = null;
+        $couponCode = 'N/A';
+
+        // ✅ Coupon discount (applies once across total amount)
+        if ($request->coupon) {
+            $coupon = Coupon::where('code', $request->coupon)
+                ->where('user_id', auth()->id())
+                ->where('used', false)
+                ->first();
+
+            if ($coupon) {
+                $totalAmount = $orders->sum('total_amount');
+                $discountAmount = $coupon->type === 'fixed'
+                    ? floatval($coupon->value)
+                    : $totalAmount * (floatval($coupon->value) / 100);
+
+                $coupon->used = true;
+                $coupon->save();
+                $couponCode = $coupon->code;
+            }
+        } else {
+            // ✅ Auto promo logic
+            $autoPromo = Promotion::where('auto_apply', true)
+                ->whereDate('start_date', '<=', now())
+                ->whereDate('end_date', '>=', now())
+                ->first();
+
+            if ($autoPromo) {
+                $promoApplied = $autoPromo;
+                $totalAmount = $orders->sum('total_amount');
+                $discountAmount = $autoPromo->type === 'fixed'
+                    ? floatval($autoPromo->value)
+                    : $totalAmount * (floatval($autoPromo->value) / 100);
+
+                $couponCode = $autoPromo->code ?? 'auto-applied';
+            }
+        }
+
         $totalAmount = $orders->sum('total_amount');
+        $finalAmount = max(0, $totalAmount - $discountAmount);
+
         \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         $paymentIntent = \Stripe\PaymentIntent::create([
-            'amount' => $totalAmount * 100,
+            'amount' => $finalAmount * 100,
             'currency' => 'myr',
             'metadata' => [
                 'order_ids' => implode(',', $orderIds),
                 'user_id' => auth()->id(),
+                'discount_applied' => $discountAmount,
+                'coupon_code' => $couponCode,
             ],
         ]);
 
@@ -206,6 +250,7 @@ public function regularMultiInitiate(Request $request)
         return response()->json(['error' => 'Something went wrong during payment.'], 500);
     }
 }
+
 
 
 
@@ -436,7 +481,6 @@ public function guestInitiatePayment(Request $request)
     }
 }
 
-use Illuminate\Support\Facades\Session;
 
 public function guestSuccess(Request $request)
 {
