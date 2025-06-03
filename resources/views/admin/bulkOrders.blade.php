@@ -41,7 +41,10 @@
                 @foreach ($bulkOrders as $bulkOrder)
                 <tr>
                     <td class="px-4 py-2 font-medium">{{ $bulkOrder->id }}</td>
-                    <td class="px-4 py-2">{{ $bulkOrder->user->name }}</td>
+                    <td class="px-4 py-2">
+                        <div class="font-medium">{{ $bulkOrder->user->name }}</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">{{ $bulkOrder->user->email }}</div>
+                    </td>
                     <td class="px-4 py-2 capitalize">{{ $bulkOrder->status }}</td>
                     <td class="px-4 py-2">
                         @if ($bulkOrder->status === 'approved' && $bulkOrder->price <= 0)
