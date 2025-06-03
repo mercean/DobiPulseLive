@@ -484,30 +484,5 @@ public function guestSuccess(Request $request)
     return view('payment.guest_success', compact('orders'));
 }
 
-
-
-
-
-        // ✅ Dispatch job to free machine later
-        MarkMachineAvailable::dispatch($order->id)->delay($order->end_time);
-
-        // ✅ Mark machine as in use
-        if ($order->machine_id && ($machine = Machine::find($order->machine_id))) {
-            $machine->status = 'in_use';
-            $machine->save();
-        }
-
-        // ✅ Send receipt to guest
-        if ($order->guest_email) {
-            Mail::to($order->guest_email)->send(new PaymentReceipt($order, 0));
-        }
-
-    }
-
-    return view('payment.guest_success', compact('orders'));
 }
 
-
-
-
-}
