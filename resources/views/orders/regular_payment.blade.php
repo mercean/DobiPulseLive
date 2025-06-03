@@ -203,9 +203,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('card-errors').textContent = result.error.message;
             } else if (result.paymentIntent.status === 'succeeded') {
                 @if(isset($orders))
-                    window.location.href = "/payment/regular/success?order_ids={{ $orders->pluck('id')->implode(',') }}";
+                const redirectUrl = new URL("/payment/regular/success", window.location.origin);
+                redirectUrl.searchParams.append("order_ids", "{{ $orders->pluck('id')->implode(',') }}");
+                if (couponCode) {
+                    redirectUrl.searchParams.append("coupon", couponCode);
+                }
+                window.location.href = redirectUrl.toString();
                 @else
-                    window.location.href = "/payment/regular/success?order_id={{ $order->id }}";
+                const redirectUrl = new URL("/payment/regular/success", window.location.origin);
+                redirectUrl.searchParams.append("order_id", "{{ $order->id }}");
+                if (couponCode) {
+                    redirectUrl.searchParams.append("coupon", couponCode);
+                }
+                window.location.href = redirectUrl.toString();
                 @endif
             }
         }

@@ -295,13 +295,16 @@ public function regularSuccess(Request $request)
         'user_id' => $order->user_id,
         'order_id' => $order->id,
         'payment_intent_id' => $paymentIntentId ?? 'unknown',
-        'amount' => $order->price,
+        'amount' => $order->total_amount, // ✅ Matches Stripe & order table
         'status' => 'succeeded',
         'method' => 'card',
         'currency' => 'usd',
         'metadata' => [
-        'order_id' => $order->id,
-    ],
+            'order_id' => $order->id,
+            'discount_applied' => $request->query('discount_applied') ?? 0,
+            'coupon_code' => $request->query('coupon') ?? 'N/A',
+        ],
+
 ]);
 
 
@@ -433,13 +436,14 @@ public function guestInitiatePayment(Request $request)
     }
 }
 
+use Illuminate\Support\Facades\Session;
+
 public function guestSuccess(Request $request)
 {
     $orderIds = explode(',', $request->order_ids);
     $orders = Order::whereIn('id', $orderIds)->get();
 
     foreach ($orders as $order) {
-        // ✅ Approve the order
         $requiredTime = $order->required_time ?? 30;
         $order->status = 'approved';
         $order->end_time = now()->addMinutes($requiredTime);
@@ -447,7 +451,6 @@ public function guestSuccess(Request $request)
 
         $paymentIntentId = $request->query('payment_intent');
 
-        // 🛡 fallback: if missing, attempt to find it via Stripe API
         if (!$paymentIntentId && $request->has('order_id')) {
             $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
             $intents = $stripe->paymentIntents->all(['limit' => 10]);
@@ -464,15 +467,24 @@ public function guestSuccess(Request $request)
             'user_id' => $order->user_id,
             'order_id' => $order->id,
             'payment_intent_id' => $paymentIntentId ?? 'unknown',
-            'amount' => $order->price,
+            'amount' => $order->total_amount,
             'status' => 'succeeded',
             'method' => 'card',
-            'currency' => 'usd',
+            'currency' => 'myr',
             'metadata' => [
-            'order_id' => $order->id,
-            'guest_email' => $order->guest_email ?? null,
-        ],
-    ]);
+                'order_id' => $order->id,
+                'guest_email' => $order->guest_email ?? null,
+            ],
+        ]);
+    }
+
+    // 🟢 Fix: Ensure guest email is cleared after payment
+    Session::forget('guest_email');
+
+    return view('payment.guest_success', compact('orders'));
+}
+
+
 
 
 
