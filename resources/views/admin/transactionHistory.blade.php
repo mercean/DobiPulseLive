@@ -22,7 +22,7 @@
                 <tr>
                     <th class="px-4 py-3">User</th>
                      <th class="px-4 py-3">User Type</th> 
-                    <th class="px-4 py-3">#</th>
+                    <th class="px-4 py-3">Transaction ID</th>
                     <th class="px-4 py-3">Amount</th>
                     <th class="px-4 py-3">Status</th>
                     <th class="px-4 py-3">Method</th>
