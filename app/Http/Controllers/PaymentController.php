@@ -335,6 +335,8 @@ public function regularSuccess(Request $request)
             }
         }
     }
+\Log::info("🧾 About to create payment", ['order' => $order]);
+\Log::info("🧾 Email: " . ($order->user->email ?? 'guest'), ['order_id' => $order->id]);
 
     Payment::create([
         'user_id' => $order->user_id,
