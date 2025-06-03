@@ -131,6 +131,19 @@ x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userC
         </button>
     </div>
 
+<!-- Normal Orders Filter -->
+<form action="{{ route('admin.dashboard') }}" method="GET" class="mb-4">
+    <select name="normal_status" class="rounded px-3 py-2 border bg-white dark:bg-gray-700 text-sm">
+        <option value="">All</option>
+        <option value="pending" {{ request('normal_status') == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="approved" {{ request('normal_status') == 'approved' ? 'selected' : '' }}>Approved</option>
+        <option value="paid" {{ request('normal_status') == 'paid' ? 'selected' : '' }}>Paid</option>
+        <option value="processing" {{ request('normal_status') == 'processing' ? 'selected' : '' }}>Processing</option>
+        <option value="finished" {{ request('normal_status') == 'finished' ? 'selected' : '' }}>Finished</option>
+    </select>
+    <button type="submit" class="ml-2 bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+</form>
+
     <!-- Table Body -->
     <div x-show="!normalCollapsed" x-cloak>
         <div class="overflow-x-auto">
@@ -156,6 +169,11 @@ x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userC
                     @endforeach
                 </tbody>
             </table>
+                        <!-- Pagination -->
+            <div class="mt-4">
+                {{ $orders->appends(request()->query())->links() }}
+            </div>
+
         </div>
     </div>
 

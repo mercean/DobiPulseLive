@@ -28,7 +28,15 @@ public function index(Request $request)
     $status = $request->input('status');
     $search = $request->input('search');
     $notifications = auth()->user()->unreadNotifications;
+    $normalStatus = $request->input('normal_status');
 
+
+        $ordersQuery = Order::with('user')
+        ->whereHas('user', fn($q) => $q->where('account_type', 'regular'))
+        ->when($normalStatus, fn($q) => $q->where('status', $normalStatus))
+        ->orderBy('created_at', 'desc');
+
+    $orders = $ordersQuery->paginate(10); // add pagination
 
     // Unified query with status + search filters
     $bulkOrdersQuery = BulkOrder::with('user');
@@ -47,7 +55,6 @@ public function index(Request $request)
     // Use paginate instead of get for performance
     $bulkOrders = $bulkOrdersQuery->paginate(10);
 
-    $orders = Order::all();
     $totalUsers = User::count();
     $totalOrders = Order::count();
     $totalBulkOrders = BulkOrder::count();
