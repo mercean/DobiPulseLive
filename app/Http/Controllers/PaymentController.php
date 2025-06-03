@@ -78,7 +78,10 @@ class PaymentController extends Controller
             'status' => 'succeeded',
             'method' => 'card',
             'currency' => 'usd',
-        ]);
+            'metadata' => [
+            'order_id' => $order->id,,
+    ],
+]);
 
 
 
@@ -296,7 +299,10 @@ public function regularSuccess(Request $request)
         'status' => 'succeeded',
         'method' => 'card',
         'currency' => 'usd',
-    ]);
+        'metadata' => [
+        'order_id' => $order->id,,
+    ],
+]);
 
 
 
@@ -462,7 +468,11 @@ public function guestSuccess(Request $request)
             'status' => 'succeeded',
             'method' => 'card',
             'currency' => 'usd',
-        ]);
+            'metadata' => [
+            'order_id' => $order->id,
+            'guest_email' => $order->guest_email ?? null,
+        ],
+    ]);
 
 
 
