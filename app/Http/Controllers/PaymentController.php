@@ -20,6 +20,7 @@ use App\Notifications\PromotionAvailable;
 use App\Notifications\LoyaltyPointsUpdated;
 use App\Notifications\OrderStatusUpdated;
 use App\Jobs\ExpireUnpaidOrder;
+use App\Models\Payment;
 
 
 class PaymentController extends Controller
@@ -53,6 +54,17 @@ class PaymentController extends Controller
         // ✅ Update status to 'paid' (not 'processing'!)
         $order->status = 'paid';
         $order->save();
+
+                Payment::create([
+            'user_id' => $order->user_id,
+            'order_id' => $order->id,
+            'payment_intent_id' => $request->query('payment_intent'),
+            'amount' => $order->price,
+            'status' => 'succeeded',
+            'method' => 'card',
+            'currency' => 'usd',
+        ]);
+
 
         \Log::info("✅ Bulk payment successful for order ID: {$order->id}");
 
@@ -208,6 +220,9 @@ public function regularSuccess(Request $request)
                 $loyalty->save();
             }
 
+
+
+
             $order->load('user');
 
             $email = $order->user->email ?? session('guest_email');
@@ -241,6 +256,17 @@ public function regularSuccess(Request $request)
     $order->status = 'approved';
     $order->end_time = Carbon::now()->addMinutes($requiredTime);
     $order->save();
+
+        Payment::create([
+        'user_id' => $order->user_id,
+        'order_id' => $order->id,
+        'payment_intent_id' => $request->query('payment_intent'), // or manually pass from frontend
+        'amount' => $order->total_amount,
+        'status' => 'succeeded',
+        'method' => 'card',
+        'currency' => 'myr',
+    ]);
+
 
     MarkMachineAvailable::dispatch($order->id)->delay($order->end_time);
 
@@ -380,6 +406,17 @@ public function guestSuccess(Request $request)
         $order->status = 'approved';
         $order->end_time = now()->addMinutes($requiredTime);
         $order->save();
+
+                Payment::create([
+            'user_id' => null,
+            'order_id' => $order->id,
+            'payment_intent_id' => $request->query('payment_intent'),
+            'amount' => $order->total_amount,
+            'status' => 'succeeded',
+            'method' => 'card',
+            'currency' => 'myr',
+        ]);
+
 
         // ✅ Dispatch job to free machine later
         MarkMachineAvailable::dispatch($order->id)->delay($order->end_time);
