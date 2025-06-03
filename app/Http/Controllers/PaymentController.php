@@ -79,7 +79,7 @@ class PaymentController extends Controller
             'method' => 'card',
             'currency' => 'usd',
             'metadata' => [
-            'order_id' => $order->id,,
+            'order_id' => $order->id,
     ],
 ]);
 
@@ -300,7 +300,7 @@ public function regularSuccess(Request $request)
         'method' => 'card',
         'currency' => 'usd',
         'metadata' => [
-        'order_id' => $order->id,,
+        'order_id' => $order->id,
     ],
 ]);
 
