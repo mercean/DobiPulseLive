@@ -268,7 +268,9 @@ public function regularSuccess(Request $request)
             $order->end_time = Carbon::now()->addMinutes($requiredTime);
             $order->save();
 
+            
             MarkMachineAvailable::dispatch($order->id)->delay($order->end_time);
+            
 
             if ($order->machine_id && ($machine = Machine::find($order->machine_id))) {
                 $machine->status = 'in_use';
@@ -308,6 +310,26 @@ public function regularSuccess(Request $request)
                     $order->user->notify(new PromotionAvailable($promo));
                 }
             }
+            $orderIds = $request->query('order_ids');
+            $paymentIntentId = $request->query('payment_intent'); // ✅ add this line
+
+                    Payment::create([
+            'user_id' => $order->user_id,
+            'order_id' => $order->id,
+            'payment_intent_id' => $paymentIntentId ?? 'unknown',
+            'amount' => $order->total_amount,
+            'status' => 'succeeded',
+            'method' => 'card',
+            'currency' => 'myr',
+            'metadata' => [
+                'order_id' => $order->id,
+                'discount_applied' => $request->query('discount_applied') ?? 0,
+                'coupon_code' => $request->query('coupon') ?? 'N/A',
+            ],
+        ]);
+
+            \Log::info("✅ Order #{$order->id} approved", $order->toArray());
+
         }
 
         session()->forget('guest_email');
