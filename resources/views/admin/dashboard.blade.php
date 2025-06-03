@@ -123,7 +123,16 @@ x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userC
 
 <!-- Normal Orders Table -->
 <div x-show="activeTab === 'normal'" x-cloak class="bg-white dark:bg-gray-800 rounded-xl shadow p-6 mb-10">
-    <h2 class="text-lg font-bold text-gray-800 dark:text-white mb-4">Normal Orders Table</h2>
+    <div class="flex justify-between items-center mb-4">
+        <h2 class="text-lg font-bold text-gray-800 dark:text-white">🧾 Normal Orders</h2>
+        <button @click="normalCollapsed = !normalCollapsed">
+            <x-heroicon-o-chevron-down x-show="normalCollapsed" class="w-6 h-6" />
+            <x-heroicon-o-chevron-up x-show="!normalCollapsed" class="w-6 h-6" />
+        </button>
+    </div>
+
+    <!-- Table Body -->
+    <div x-show="!normalCollapsed" x-cloak>
         <div class="overflow-x-auto">
             <table class="w-full text-sm text-left">
                 <thead class="bg-gray-100 dark:bg-gray-700">
