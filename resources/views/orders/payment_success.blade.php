@@ -3,12 +3,14 @@
 @section('content')
 <div class="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900 px-4 py-10">
     <div class="w-full max-w-4xl">
+
+        {{-- MULTIPLE ORDERS (ARRAY) --}}
         @if(isset($orders))
             @foreach($orders as $order)
                 @php
                     $payment = \App\Models\Payment::where('order_id', $order->id)->latest()->first();
-                    $discount = $payment->metadata['discount_applied'] ?? 0;
-                    $couponCode = $payment->metadata['coupon_code'] ?? null;
+                    $discount = $payment?->metadata['discount_applied'] ?? 0;
+                    $couponCode = $payment?->metadata['coupon_code'] ?? null;
                 @endphp
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center mb-6">
                     <div class="flex flex-col items-center">
@@ -16,10 +18,17 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4 -4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" />
                         </svg>
                         <h2 class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">Payment Successful!</h2>
-                        <p class="text-gray-700 dark:text-gray-300">Thank you for your payment. Order ID: <span class="text-blue-600 dark:text-blue-400 font-semibold">{{ $order->order_number ?? $order->id }}</span></p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ $order->created_at->format('d M Y, h:i A') }}</p>
+                        <p class="text-gray-700 dark:text-gray-300">Thank you for your payment. Order ID: 
+                            <span class="text-blue-600 dark:text-blue-400 font-semibold">
+                                {{ $order->order_number ?? $order->id }}
+                            </span>
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            {{ $order->created_at->format('d M Y, h:i A') }}
+                        </p>
                     </div>
 
+                    @if($payment)
                     <div class="grid md:grid-cols-2 gap-6 text-left mt-6">
                         <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                             <h4 class="font-semibold mb-2">Payment Summary</h4>
@@ -39,14 +48,20 @@
                             <p><strong>Time Selected:</strong> {{ $order->required_time }} mins</p>
                         </div>
                     </div>
+                    @else
+                    <div class="text-yellow-600 bg-yellow-100 dark:bg-yellow-700 p-4 rounded mt-4">
+                        <strong>Note:</strong> No payment record found for this order.
+                    </div>
+                    @endif
                 </div>
             @endforeach
 
+        {{-- SINGLE ORDER --}}
         @elseif(isset($order))
             @php
                 $payment = \App\Models\Payment::where('order_id', $order->id)->latest()->first();
-                $discount = $payment->metadata['discount_applied'] ?? 0;
-                $couponCode = $payment->metadata['coupon_code'] ?? null;
+                $discount = $payment?->metadata['discount_applied'] ?? 0;
+                $couponCode = $payment?->metadata['coupon_code'] ?? null;
             @endphp
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
                 <div class="flex flex-col items-center">
@@ -54,10 +69,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4 -4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" />
                     </svg>
                     <h2 class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">Payment Successful!</h2>
-                    <p class="text-gray-700 dark:text-gray-300">Thank you for your payment. Order ID: <span class="text-blue-600 dark:text-blue-400 font-semibold">{{ $order->order_number ?? $order->id }}</span></p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">{{ $order->created_at->format('d M Y, h:i A') }}</p>
+                    <p class="text-gray-700 dark:text-gray-300">Thank you for your payment. Order ID: 
+                        <span class="text-blue-600 dark:text-blue-400 font-semibold">
+                            {{ $order->order_number ?? $order->id }}
+                        </span>
+                    </p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        {{ $order->created_at->format('d M Y, h:i A') }}
+                    </p>
                 </div>
 
+                @if($payment)
                 <div class="grid md:grid-cols-2 gap-6 text-left mt-6">
                     <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                         <h4 class="font-semibold mb-2">Payment Summary</h4>
@@ -76,9 +98,15 @@
                         <p><strong>Time Selected:</strong> {{ $order->required_time }} mins</p>
                     </div>
                 </div>
+                @else
+                <div class="text-yellow-600 bg-yellow-100 dark:bg-yellow-700 p-4 rounded mt-4">
+                    <strong>Note:</strong> No payment record found for this order.
+                </div>
+                @endif
             </div>
         @endif
 
+        {{-- ACTION BUTTONS --}}
         <div class="flex justify-center space-x-4 mt-8">
             <a href="{{ route('regular.dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,6 +121,7 @@
                 New Order
             </a>
         </div>
+
     </div>
 </div>
 @endsection
