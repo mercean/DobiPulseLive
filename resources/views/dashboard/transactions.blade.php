@@ -7,6 +7,7 @@
             <thead>
                 <tr>
                     <th>Order ID</th>
+                    <th>User Type</th>
                     <th>Total Price (RM)</th>
                     <th>Status</th>
                     <th>Date</th>
@@ -16,8 +17,14 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
+                        <td>
+                            @if ($order->user)
+                                {{ ucfirst($order->user->account_type) }}
+                            @else
+                                Guest
+                            @endif
+                        </td>
                         <td>RM{{ $order->total_amount }}</td>
-
                         <td>{{ $order->status }}</td>
                         <td>{{ $order->created_at->format('d M Y') }}</td>
                     </tr>
