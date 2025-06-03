@@ -55,15 +55,31 @@ class PaymentController extends Controller
         $order->status = 'paid';
         $order->save();
 
-                Payment::create([
+        $paymentIntentId = $request->query('payment_intent');
+
+        // 🛡 fallback: if missing, attempt to find it via Stripe API
+        if (!$paymentIntentId && $request->has('order_id')) {
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+            $intents = $stripe->paymentIntents->all(['limit' => 10]);
+
+            foreach ($intents as $intent) {
+                if (isset($intent->metadata['order_id']) && $intent->metadata['order_id'] == $order->id) {
+                    $paymentIntentId = $intent->id;
+                    break;
+                }
+            }
+        }
+
+        Payment::create([
             'user_id' => $order->user_id,
             'order_id' => $order->id,
-            'payment_intent_id' => $request->query('payment_intent'),
+            'payment_intent_id' => $paymentIntentId ?? 'unknown',
             'amount' => $order->price,
             'status' => 'succeeded',
             'method' => 'card',
             'currency' => 'usd',
         ]);
+
 
 
         \Log::info("✅ Bulk payment successful for order ID: {$order->id}");
@@ -257,15 +273,31 @@ public function regularSuccess(Request $request)
     $order->end_time = Carbon::now()->addMinutes($requiredTime);
     $order->save();
 
-        Payment::create([
+    $paymentIntentId = $request->query('payment_intent');
+
+    // 🛡 fallback: if missing, attempt to find it via Stripe API
+    if (!$paymentIntentId && $request->has('order_id')) {
+        $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+        $intents = $stripe->paymentIntents->all(['limit' => 10]);
+
+        foreach ($intents as $intent) {
+            if (isset($intent->metadata['order_id']) && $intent->metadata['order_id'] == $order->id) {
+                $paymentIntentId = $intent->id;
+                break;
+            }
+        }
+    }
+
+    Payment::create([
         'user_id' => $order->user_id,
         'order_id' => $order->id,
-        'payment_intent_id' => $request->query('payment_intent'), // or manually pass from frontend
-        'amount' => $order->total_amount,
+        'payment_intent_id' => $paymentIntentId ?? 'unknown',
+        'amount' => $order->price,
         'status' => 'succeeded',
         'method' => 'card',
-        'currency' => 'myr',
+        'currency' => 'usd',
     ]);
+
 
 
     MarkMachineAvailable::dispatch($order->id)->delay($order->end_time);
@@ -407,15 +439,31 @@ public function guestSuccess(Request $request)
         $order->end_time = now()->addMinutes($requiredTime);
         $order->save();
 
-                Payment::create([
-            'user_id' => null,
+        $paymentIntentId = $request->query('payment_intent');
+
+        // 🛡 fallback: if missing, attempt to find it via Stripe API
+        if (!$paymentIntentId && $request->has('order_id')) {
+            $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+            $intents = $stripe->paymentIntents->all(['limit' => 10]);
+
+            foreach ($intents as $intent) {
+                if (isset($intent->metadata['order_id']) && $intent->metadata['order_id'] == $order->id) {
+                    $paymentIntentId = $intent->id;
+                    break;
+                }
+            }
+        }
+
+        Payment::create([
+            'user_id' => $order->user_id,
             'order_id' => $order->id,
-            'payment_intent_id' => $request->query('payment_intent'),
-            'amount' => $order->total_amount,
+            'payment_intent_id' => $paymentIntentId ?? 'unknown',
+            'amount' => $order->price,
             'status' => 'succeeded',
             'method' => 'card',
-            'currency' => 'myr',
+            'currency' => 'usd',
         ]);
+
 
 
         // ✅ Dispatch job to free machine later
