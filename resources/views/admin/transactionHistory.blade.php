@@ -21,6 +21,7 @@
             <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                 <tr>
                     <th class="px-4 py-3">User</th>
+                     <th class="px-4 py-3">User Type</th> 
                     <th class="px-4 py-3">#</th>
                     <th class="px-4 py-3">Amount</th>
                     <th class="px-4 py-3">Status</th>
@@ -41,7 +42,16 @@
                                 <span class="text-gray-400">Unknown</span>
                             @endif
                         </td>
-
+                    <!-- 🔹 New: User Type -->
+                        <td class="px-4 py-3">
+                            @if ($transaction->user)
+                                {{ ucfirst($transaction->user->account_type) }}
+                            @elseif ($transaction->order && $transaction->order->guest_email)
+                                Guest
+                            @else
+                                Unknown
+                            @endif
+                        </td>
                         <td class="px-4 py-3 font-medium">{{ $transaction->id }}</td>
                         <td class="px-4 py-3">RM{{ number_format($transaction->amount / 100, 2) }}</td>
                         <td class="px-4 py-3 capitalize">{{ $transaction->status }}</td>
