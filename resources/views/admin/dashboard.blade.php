@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container mx-auto px-4 py-6" x-data="{ activeTab: 'normal', bulkCollapsed: true, userCollapsed: true }">
+<div class="container mx-auto px-4 py-6" 
+x-data="{ activeTab: 'normal', normalCollapsed: true, bulkCollapsed: true, userCollapsed: true }">
 <!-- Welcome Section -->
 <div class="flex items-center justify-center gap-4 mb-10">
     <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=0D8ABC&color=fff&size=80' }}" class="w-16 h-16 rounded-full border-4 border-blue-500 shadow-md">
